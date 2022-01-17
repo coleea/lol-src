@@ -3,20 +3,46 @@
     
     // padding-bottom: 200px;
     // font-size: 100px;
+    font-size: 11px;
+    color : #555555
 }
 
 .detailGameInfo{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-columns: 70px 100px 113.5px 90px 113.5px 170.5px 1fr ;
     height: 98px;
     overflow: hidden;
     border: 1px solid #cdd2d2;
+    // padding :8px;
     margin-bottom: 10px;
 
 }
 
 .gameStats {
     text-align: center;
+    padding : 10px 0 10px 0 ;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-evenly;
+}
+
+.gameStatsUpper {
+    // border-bottom: 1px solid #555;
+}
+
+.gameStatsUpper:after {
+    content: "";
+    border-bottom: 1px solid #d0a6a5 ;
+    width: 60%;
+    display: block;
+    margin: 5px auto;
+    // padding : 0 0 10px 0 ;
+    // margin-top : 10px ; 
+    
+  }
+
+.gameSettingInfoWrapper {
+    margin : 15px 0 0 0
 }
 
 .showDetailBtn {
@@ -34,6 +60,7 @@
 .followPlayers {
     display: flex;
     font-size: 11px;
+    margin : 4px 0 4px 0 ;
 }
 
 .teamMemberImg {
@@ -63,10 +90,17 @@
 }
 
 .itemImg {     
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
+    // margin-right: 0px;
 }
-
+.wardImg{
+    position: relative ;
+    top : 3px;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
 .statsBtnWin {
     display: block;
     width: 30px;
@@ -87,12 +121,19 @@
     border : 1px solid #549dc7;
 }
 
+.statBtnImg {
+    position: relative;
+    left : 8px;
+    top : 80px;
+}
+
 .championImg {
     width: 46px;
     height: 46px;
     vertical-align: middle;
     border-radius: 50%;
     overflow: hidden;
+    margin-right: 3px;
 }
 
 .gameSettingInfo { 
@@ -164,6 +205,8 @@
     
 }
 .multiKillBadge {
+    position: relative;
+    left : 35px ;
     display: inline-block;
     background: #ee5a52;
     border: 1px solid #c6443e;
@@ -174,11 +217,16 @@
     color: #f2f2f2;   
     width: max-content;
     height: 16px;
+    line-height: 15px;
+    margin-bottom: 5px;
 }
 
 .aceBadge {
+    position: relative;
+    left : 40px ;
     // display: inline-block;
     // background: #ee5a52;
+    line-height: 15px;
     border: 1px solid #c6443e;
     // border-radius: 15px;
     padding: 2px 5px;
@@ -196,17 +244,43 @@
     // text-align: center;
 }
 
-
-.kdaWrapper, .statsWrapper {
+.kdaWrapper {
     display: flex;
     flex-direction: column ;
     text-align: center;
+    margin-top: 15px;
+}
+
+.statsWrapper {
+    display: flex;
+    flex-direction: column ;
+    // justify-content: space-evenly;
+    // height: 100%;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 13px;
+    color : #555e5e
 }
 
 .visionWardWrapper  {
     text-align: center;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 .championEngName  {
     text-align: center;
+}
+
+.itemsWrapper {
+    margin-top: 17px;
+}
+
+.killInvolvement {
+    color : #d0021b
+}
+
+.gameType {
+    color: #555555 ;
+    font-weight: bold;
 }

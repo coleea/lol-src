@@ -83,10 +83,12 @@ export default function UserMain() {
                     <div className={css.gameSummary}>
                         <div className={css.winLoseStats}>
                             <div>
-                                {latest20SummaryInfo.totalMatch}전 {latest20SummaryInfo.wins}승 {latest20SummaryInfo.losses}패
+                                <div className={css.battleRecord}>
+                                    {latest20SummaryInfo.totalMatch}전 {latest20SummaryInfo.wins}승 {latest20SummaryInfo.losses}패                                
+                                </div>
                                 <div className='forDrawing'>
                                 </div>
-                                <div className='winRate'>
+                                <div className={css.winRate}>
                                     {(latest20SummaryInfo.wins / latest20SummaryInfo.totalMatch * 100).toFixed(0) } %
                                 </div>
                             </div>
@@ -109,11 +111,20 @@ export default function UserMain() {
                                 const kda = ((v.kills + v.assists) / v.deaths).toFixed(0)
                                 const winRatio = (v.wins / (v.wins + v.losses) * 100).toFixed(0)
                                 return (
-                                    <div key={i}>
-                                        <img className={css.championImg} src={v.imageUrl}></img>
-                                        {v.name}
-                                        {winRatio}% ({v.wins}승 {v.losses}패)
-                                        {kda} 평점
+                                    <div className={css.championInfoUnit} key={i}>
+                                        <div>
+                                            <img className={css.championImg} src={v.imageUrl}></img>                                        
+                                        </div>
+                                        <div>
+                                            <div className={css.championName}>
+                                                {v.name}                                            
+                                            </div>
+                                            <div className={css.championStatistics}>
+                                                <div className={css.championWinRatio}>{winRatio}%</div>
+                                                <div className={css.winAndLose}>({v.wins}승 {v.losses}패)</div>
+                                                <div className={css.championKda}>{kda} 평점</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             })}
@@ -131,7 +142,9 @@ export default function UserMain() {
                             }
                         </div>                
                         <div className={css.favoritePosition}>
-                            <p>선호 포지션 (랭크)</p>
+                            <div className={css.favoritePositionTitle}>
+                                선호 포지션 (랭크)
+                            </div>
                             {latest20SummaryInfo.positions.map((position,positionIdx)=> {
 
                                 const positionNameKor = positionNameEngToKorMapper[position.positionName]
@@ -144,11 +157,14 @@ export default function UserMain() {
                                         <div>
                                             <img src={positionImgUrl}></img>                                        
                                         </div>
-                                        <div>
-                                            <div>{positionNameKor}</div> 
+                                        <div className={css.positionInfoDetail}>
+                                            <div className={css.positionName}>{positionNameKor}</div> 
                                             <div className={css.PositionStatContent}>
-                                                <div>{roleRate}%</div>
-                                                <div>승률 {winRate} % </div>
+                                                <div className={css.roleRate}>{roleRate}%</div>
+                                                <div className={css.positionWinRatioWrapper}>
+                                                    <div>승률 </div>
+                                                    <div className={css.positionWinRate}>{winRate} %</div>  
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

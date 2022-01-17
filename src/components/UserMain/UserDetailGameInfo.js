@@ -8,6 +8,9 @@ const booleanToWinOrLoseMapper = {
     true : '승리',
     false : '패배',
 }
+const MultiKillNameEngToKorMapper = {
+    'Double Kill' : '더블킬'
+}
 
 export default function UserMain() {
 
@@ -146,10 +149,14 @@ export default function UserMain() {
                         return (
                             <div className={css.detailGameInfo + ' ' + CSSbattleResultType } key={i}>
                                 <div className={css.gameStats}>
-                                    {v.gameType}
-                                    <p>{passedTime}</p>
-                                    <p>{booleanToWinOrLoseMapper[v.isWin]}</p>
-                                    {gamePlayMinutes}분 {gamePlaySeconds}초
+                                    <div className={css.gameStatsUpper}>
+                                        <div className={css.gameType}>{v.gameType}</div>
+                                        <div>{passedTime}</div>
+                                    </div> 
+                                    <div>
+                                        <div>{booleanToWinOrLoseMapper[v.isWin]}</div>
+                                        <div>{gamePlayMinutes}분 {gamePlaySeconds}초</div>
+                                    </div>
                                 </div>
                                 <div className={css.gameSettingInfoWrapper}>
                                     <div className={css.gameSettingInfo}>
@@ -183,7 +190,7 @@ export default function UserMain() {
                                     <div>{kda}:1 평점</div>           
                                     {largestMultiKill && (
                                         <div className={css.multiKillBadge}>
-                                            {largestMultiKill}
+                                            {MultiKillNameEngToKorMapper[largestMultiKill]}
                                         </div>
                                     )} 
                                     {opScoreBadge && (
@@ -195,7 +202,7 @@ export default function UserMain() {
                                 <div className={css.statsWrapper}>
                                     <div>레벨{v.champion.level}</div>
                                     <div>{cs} ({csPerMin}) CS</div>
-                                    <div>킬관여 {contributionForKillRate}</div>
+                                    <div className={css.killInvolvement}>킬관여 {contributionForKillRate}</div>
                                 </div>
                                 <div className={css.itemsWrapper}>
                                     <div className={css.items}>
@@ -220,7 +227,7 @@ export default function UserMain() {
                                         <img className={css.itemImg} src="//opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png" ></img>
                                     </div>
                                     <div className={css.visionWardWrapper}>
-                                        <img className={css.itemImg} src="//opgg-static.akamaized.net/images/site/summoner/icon-ward-red.png"></img> 
+                                        <img className={css.wardImg} src="//opgg-static.akamaized.net/images/site/summoner/icon-ward-red.png"></img> 
                                         제어 와드 {visionWardsBought}
                                     </div>
                                 </div>                                        
@@ -253,9 +260,8 @@ export default function UserMain() {
                                         })}
                                     </div>
                                 </div>                                        
-                                <div className={CSSStatsBtn}>
-                                    
-                                    <img  src={v.isWin ? "detail_btn_for_win.png" : "detail_btn_for_lose.png"}></img>
+                                <div className={CSSStatsBtn}>                                    
+                                    <img className={css.statBtnImg}  src={v.isWin ? "detail_btn_for_win.png" : "detail_btn_for_lose.png"}></img>
                                 </div>                             
                             </div>
                         )
@@ -263,7 +269,6 @@ export default function UserMain() {
                 </div>
             )}
             <div className={css.itemToolTipWrapper} ref={itemToolTipRef}>
-                    asdf
             </div>
             <div className='itemToolTipWrapper'></div>
         </>

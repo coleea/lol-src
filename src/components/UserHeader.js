@@ -41,7 +41,7 @@ function PastRanks({userHeaderInfo}){
 function UserPic({userHeaderInfo}){
     return (
         <div className={css.userPic}>
-            <img src={userHeaderInfo.profileImageUrl} width={100} height={100}></img>
+            <img src={userHeaderInfo.profileBackgroundImageUrl} width={100} height={100}></img>
             <img className={css.profileBorder} src={userHeaderInfo.profileBorderImageUrl} width={120} height={120}></img>
             <p className={css.level} title="레벨">{userHeaderInfo.level}</p>
         </div>        

@@ -83,6 +83,7 @@ export default function Header() {
         const userHeaderInfo = {
             username : basicInfo.summoner.name.replace(/[\\+]/g,' '),
             profileImageUrl: basicInfo.summoner.profileImageUrl,
+            profileBackgroundImageUrl: basicInfo.summoner.profileBackgroundImageUrl,
             profileBorderImageUrl : basicInfo.summoner.profileBorderImageUrl,
             level : basicInfo.summoner.level,
             ladderRank : basicInfo.summoner.ladderRank.rank,
