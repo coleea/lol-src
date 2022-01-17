@@ -1,0 +1,30 @@
+.solRankInfo, ._5on5RankInfo {
+    display: flex;    
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+    font-size: 11px;
+    padding-bottom: 10px;
+}
+
+.solRankInfo {
+    margin-bottom: 10px;
+}
+
+.tierRank {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1f8ecd;
+}
+
+.lp {
+    color: #555e5e;
+    font-weight: bold;
+}
+
+.lpAndWinLose {
+    display: flex;
+    flex-direction: row;
+    // font-size: ;
+}

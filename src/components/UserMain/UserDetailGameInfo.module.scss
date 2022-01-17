@@ -1,0 +1,212 @@
+.wrapper {
+    // margin: 50px 0 50px 0;
+    
+    // padding-bottom: 200px;
+    // font-size: 100px;
+}
+
+.detailGameInfo{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    height: 98px;
+    overflow: hidden;
+    border: 1px solid #cdd2d2;
+    margin-bottom: 10px;
+
+}
+
+.gameStats {
+    text-align: center;
+}
+
+.showDetailBtn {
+    // background: red;
+}
+
+.typeWin {
+    background: #d6b5b2   ;
+}
+
+.typeLose {
+    background: #b0ceea    ;
+}
+
+.followPlayers {
+    display: flex;
+    font-size: 11px;
+}
+
+.teamMemberImg {
+    width: 16px;
+    height: 16px;
+}
+
+.teamMemberWrapper {
+    display: flex;    
+    // width: 80px;
+    // overflow: hidden;        
+}
+
+.teamMemberName {
+    width: 56px;
+    overflow: hidden;        
+}
+
+.items {
+    display: grid;
+    grid-template-areas: 
+        "a b c d"
+        "e f g h" ;
+    // flex-direction: column;
+    // flex-flow: wrap;
+    // items
+}
+
+.itemImg {     
+    width: 24px;
+    height: 24px;
+}
+
+.statsBtnWin {
+    display: block;
+    width: 30px;
+    position: relative;
+    cursor: pointer;
+    background: #e89c95;
+    border : 1px solid #c8817c;
+    // display: flex;    
+    // flex-direction: column-reverse;
+}
+
+.statsBtnLose {
+    display: block;
+    width: 30px;
+    position: relative;
+    cursor: pointer;
+    background: #7fb0e1;
+    border : 1px solid #549dc7;
+}
+
+.championImg {
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.gameSettingInfo { 
+    display: flex;
+}
+
+.spellImg {
+    width: 22px;
+    height: 22px;   
+}
+
+.itemToolTipWrapper {
+    // display: none;
+}
+
+.itemToolTipUpperSide {
+    position : absolute ; 
+    z-index: 9;
+    background : black;
+    color: white;
+    padding: 10px;
+    max-width: 300px;
+    // font-size: 100px;
+}
+
+.itemToolTipUpperSide::after {
+    border-top:10px solid black;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    // border-bottom: 10px solid black;
+    content:"";
+    position:absolute;
+    bottom:-10px;
+    left:50%;
+   }
+
+   
+.itemToolTipBottomSide {
+    position : absolute ; 
+    z-index: 9;
+    background : black;
+    color: white;
+    padding: 10px;
+    max-width: 300px;
+    
+}
+
+.itemToolTipBottomSide::after {
+    // border-top:10px solid black;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+    content:"";
+    position:absolute;
+    top : -10px;
+    left:50%;
+   }
+
+   
+.displayNone {
+    // display: none;
+}
+
+.kdaWrapper {
+    display: flex;
+    flex-direction: column;
+    // justify-items: center;
+    text-align: center;
+    
+}
+.multiKillBadge {
+    display: inline-block;
+    background: #ee5a52;
+    border: 1px solid #c6443e;
+    border-radius: 15px;
+    padding: 2px 5px;
+    line-height: 1;
+   font-size: 10px;
+    color: #f2f2f2;   
+    width: max-content;
+    height: 16px;
+}
+
+.aceBadge {
+    // display: inline-block;
+    // background: #ee5a52;
+    border: 1px solid #c6443e;
+    // border-radius: 15px;
+    padding: 2px 5px;
+    // line-height: 1;
+//    font-size: 10px;
+    // color: #f2f2f2;   
+
+    border-radius: 9px;
+    background-color: #8c51c5;
+    border: solid 1px #7f3590;
+    font-size: 10px;
+    color: #f2f2f2;   
+    width: max-content;
+    height: 16px;
+    // text-align: center;
+}
+
+
+.kdaWrapper, .statsWrapper {
+    display: flex;
+    flex-direction: column ;
+    text-align: center;
+}
+
+.visionWardWrapper  {
+    text-align: center;
+}
+
+.championEngName  {
+    text-align: center;
+}

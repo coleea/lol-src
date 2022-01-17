@@ -1,0 +1,24 @@
+html {
+  background-color: #eaeaea;
+  font-size: 12px;
+}
+
+body {
+  font-family: Helvetica, Sans-Serif; 
+}
+.app {
+  max-width: 1440px;
+  margin : auto;
+}
+
+.body {
+  width: 100%;
+  margin: auto; 
+ }
+
+.main {
+  display: flex;  
+  margin-left: 11%;
+  // grid-template-columns: 300px 690px;
+  // margin: 0 100px 0 100px;
+}
