@@ -1,0 +1,95 @@
+{
+  "gameId": "292728896",
+  "teams": [
+    {
+      "teamId": 1,
+      "players": [
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Anivia.png",
+            "level": 31
+          },
+          "summonerId": "2476306",
+          "summonerName": "Fake+Makeit"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+            "level": 20
+          },
+          "summonerId": "1140183",
+          "summonerName": "사람이름이윤용호"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Lucian.png",
+            "level": 9
+          },
+          "summonerId": "1720836",
+          "summonerName": "DWG Canyon"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png",
+            "level": 6
+          },
+          "summonerId": "2027462",
+          "summonerName": "저승용호야"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+            "level": 20
+          },
+          "summonerId": "2815873",
+          "summonerName": "Contact912"
+        }
+      ]
+    },
+    {
+      "teamId": 2,
+      "players": [
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+            "level": 20
+          },
+          "summonerId": "2329507",
+          "summonerName": "T1 Gumayusi"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+            "level": 11
+          },
+          "summonerId": "2103519",
+          "summonerName": "Destiny"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+            "level": 11
+          },
+          "summonerId": "1533900",
+          "summonerName": "black svvan"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+            "level": 20
+          },
+          "summonerId": "2102082",
+          "summonerName": "손연우 사랑해"
+        },
+        {
+          "champion": {
+            "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Anivia.png",
+            "level": 31
+          },
+          "summonerId": "3110503",
+          "summonerName": "손연우 사랑해"
+        }
+      ]
+    }
+  ]
+}

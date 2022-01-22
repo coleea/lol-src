@@ -27,6 +27,8 @@ export default function UserHeader() {
     )
 }
 
+
+
 function PastRanks({userHeaderInfo}){
     return (
         <ul className={css.pastRankList}>

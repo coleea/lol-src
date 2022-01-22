@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import css from './App.module.scss';
@@ -6,6 +5,9 @@ import Header from './components/Header';
 import UserHeader from './components/UserHeader';
 import UserMain from './components/UserMain';
 import UserSidebar from './components/UserSidebar';
+import Footer from './components/Footer';
+
+const l = console.log 
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
                 <UserMain/>
               </div>      
             </div>       
+            <Footer/>
         </div>
     </RecoilRoot>
   );

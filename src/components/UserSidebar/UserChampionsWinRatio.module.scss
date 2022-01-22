@@ -1,42 +1,3 @@
-.wrapper {
-    // margin-top: 20px;
-    background: #ededed;
-    border: 1px solid #cdd2d2;
-
-}
-
-.championWinRateWrapper {
-    display: grid;
-    grid-template-columns: 50px 1fr 1fr 1fr;
-
-    // display: table;
-    // width: 100%;
-    border-bottom: 1px solid #cdd2d2;
-    color: #879292;
-    text-align: center;
-
-}
-
-.championImg {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-}
-
-.upperContents{
-    font-weight: bold;
-    font-size: 13px;
-    color: #5e5e5e
-
-
-}
-
-.bottomContents {
-    margin-top: 6px;
-    font-size: 12px;
-    white-space: nowrap;
-    color : #879292
-}
 
 .winRatioOption {
     margin-top: 20px;
@@ -44,45 +5,167 @@
     width: 100%;
     table-layout: fixed;
     height: 50px;
+
+    .winRatioType {
+        display: table-cell;
+        border-left: 1px solid #cdd2d2;
+        border-bottom: 1px solid #cdd2d2;
+        background-color: #f2f2f2;
+        vertical-align: middle;
+        cursor: pointer;
+        color: #879292;
+        text-align: center;
+    }
+    
+    .itemActive {
+        border-bottom-color: #ededed;
+        background-color: #ededed;
+        color: #555e5e;
+        font-weight: bold;
+        border-bottom: 0;
+    }
 }
 
-.winRatioType {
-    display: table-cell;
+.wrapper {
+    background: #ededed;
     border-left: 1px solid #cdd2d2;
+    border-right: 1px solid #cdd2d2;
     border-bottom: 1px solid #cdd2d2;
-    background-color: #f2f2f2;
-    vertical-align: middle;
-    cursor: pointer;
-    color: #879292;
-    text-align: center;
-}
+    
+    .championWinRateWrapper, .champion7DaysWinRateWrapper {
+       
 
-.itemActive {
-    border-bottom-color: #ededed;
-    background-color: #ededed;
-    color: #555e5e;
-    font-weight: bold;
-}
+    }  
 
-.winRatioBar {
-    display: flex;
-    width: 135px;
-    height: 20px;
-    background: #3d95e5;
-    color : white
-}
+    .championWinRateWrapper {
+        display: grid;
+        grid-template-columns: 70px 90px 80px 1fr;
+        border-bottom: 1px solid #cdd2d2;
+        color: #879292;
+        // text-align: center;
+        height: 53px;
+        .championImgWrapper {
+            margin : 0 auto ;
+            .championImg {
+                position: relative;
+                top:4px;
+                // left : 5px;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+            } 
+        }
 
-.winBar {
-    background: red;
-    display : flex;
-    position: relative;
-    // left : 10px;
-    // padding-left : 50px;
+        .championName{
+            // text-align: left;
+            overflow: hidden;        
+            text-overflow: ellipsis;
+            white-space:nowrap;
+        }   
 
-}
+        .upperContents{
+            font-weight: bold;
+            font-size: 13px;
+            color: #5e5e5e;
+            margin-bottom : 5px;
+            padding : 0 ;
+        }
+        .kdaGreat {
+            color: #1f8ecd;
+        }
+        
+        .bottomContents {
+            margin : 0 ;
+            padding : 0 ;
+            font-size: 12px;
+            white-space: nowrap;
+            color : #879292
+        }     
+        ._4thBlock{
+            .upperContents, .bottomContents{
+                text-align: center;
+                // margin : auto;
+            }
+        }  
+    }
 
-.loseBar {
-    background: #3d95e5;
-    display: flex;
-    flex-direction: row-reverse;
+    .champion7DaysWinRateWrapper {
+        display: grid;
+        grid-template-columns: 60px 70px 1fr 1fr;
+        border-bottom: 1px solid #cdd2d2;
+        color: #879292;
+        // text-align: center;
+        height: 48px;
+        .championImgWrapper {
+            margin : 0 auto ;
+            .championImg {            
+                position: relative;
+                top: 9px;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+            }
+        }
+        .name {
+            text-align: left;
+            font-size: 13px;
+            font-weight: bold;
+            color: #525252;
+            overflow: hidden;        
+            text-overflow: ellipsis;
+            white-space:nowrap;
+        }
+
+        .name, .winRatio{
+            position: relative;
+            top: 18px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+        .winRatioBar {
+            position: relative;
+            top : 14px;
+            right : 10px ;
+            display: flex;
+            width: 123px;
+            height: 24px;
+            background: #3d95e5;
+            color : white;
+            border: 0px solid #ededed;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        
+            .winBar {
+                background: red;
+                display : flex;
+                position: relative;
+                border: 1px solid red;
+                border-radius: 5px 0 0 5px;
+                .winCount {
+                    position: relative;
+                    top : 4px;
+                    left : 4px;
+
+                }
+            }
+            .loseBar {
+                background: #3d95e5;
+                display: flex;
+                flex-direction: row-reverse;
+                border: 1px solid #3d95e5;
+                border-radius: 0px 5px 5px 0px;
+                .loseCount {
+                    position: relative;
+                    top : 4px;
+                    right : 4px;
+                    text-align: right;
+                    width: 100%;
+                    overflow: hidden;
+                }
+            }
+        }                
+    }
 }

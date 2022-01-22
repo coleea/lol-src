@@ -13,25 +13,13 @@ const winRatioTypeMapper = {
 
 export default function UserSidebar() {
 
-    const [winRatioType, setWinRatioType] = useState(winRatioTypeMapper.freeSeasion)
-    const [winRatioInfo, setWinRatioInfo] = useState()
     const [userSidebarInfo, setUserSidebarInfo]  = useRecoilState(userSidebarInfoAtom)
-
-    useEffect(()=>{
-        /* 
-          winRatioFreeSeason : mostInfo.champions,
-            winRatio7Days : mostInfo.recentWinRate,
-        */
-        if(userSidebarInfo && winRatioType === winRatioTypeMapper.freeSeasion ) {
-            setWinRatioInfo(userSidebarInfo.winRatioFreeSeason)
-            
-            // userSidebarInfo 
-        } else if(userSidebarInfo) {
-            setWinRatioInfo(userSidebarInfo.winRatio7Days)
-
-        }
-
-    }, [winRatioType, userSidebarInfo])
+    const [winRatioType, setWinRatioType] = useState(winRatioTypeMapper.freeSeasion)
+    const winRatioInfo =  userSidebarInfo ? 
+                                (winRatioType === winRatioTypeMapper.freeSeasion) ? 
+                                    userSidebarInfo.winRatioFreeSeason 
+                                    : userSidebarInfo.winRatio7Days
+                                : null 
 
     return (
         <>

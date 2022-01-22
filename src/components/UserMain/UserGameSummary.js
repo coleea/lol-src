@@ -9,7 +9,7 @@ const l = console.log
 
 const positionNameEngToKorMapper = {
     'Top' : '탑',
-    'Mid' : '미드',
+    'Middle' : '미드',
     'Jungle' : '정글',
     'Bottom' : '원딜',
     'Support' : '서포터',
@@ -17,7 +17,7 @@ const positionNameEngToKorMapper = {
 
 const positionImgUrlMapper = {
     'Top' : './top_icon.png',
-    'Mid' : './mid_icon.png',
+    'Middle' : './mid_icon.png',
     'Jungle' : './jungle_icon.png',
     'Bottom' : './onedeal_icon.png',
     'Support' : './supporter_icon.png',
@@ -34,17 +34,15 @@ export default function UserMain() {
             
             drawWinRatioCircle(latest20SummaryInfo)
 
-            if(latest20SummaryInfo.champions.length < 3) {
-                const emptyChampionCount = 3 - latest20SummaryInfo.champions.length
-                setEmptyChampionCount(emptyChampionCount)
-            }
+            const emptyChampionCount = 3 - latest20SummaryInfo.champions.length
+            setEmptyChampionCount(emptyChampionCount)
         }
     }, [latest20SummaryInfo])
 
-    // const kda = latest20SummaryInfo.kills / latest20SummaryInfo.assists / latest20SummaryInfo.deaths
-
     function drawWinRatioCircle(latest20SummaryInfo){    
 
+        document.querySelector('.forDrawing').innerHTML = ''
+        
         const color = d3.scaleOrdinal()
                         .range(['#ee5a52', '#1f8ecd'])
 
@@ -64,7 +62,13 @@ export default function UserMain() {
                         .outerRadius(45)
                 
         const winRatio = latest20SummaryInfo.wins / latest20SummaryInfo.totalMatch * 100
-        const loseRatio = latest20SummaryInfo.losses / latest20SummaryInfo.totalMatch * 100
+        let loseRatio = latest20SummaryInfo.losses / latest20SummaryInfo.totalMatch * 100
+
+        // 버그 회피용. 두 값이 같으면 제대로 그려지지 않음
+        if(winRatio === loseRatio) {
+            loseRatio += 0.000001
+        }
+
         const arcs = group.selectAll('arc')
                             .data(pie([winRatio,loseRatio]))
                             .enter()
@@ -94,17 +98,27 @@ export default function UserMain() {
                             </div>
                         </div>
                         <div className={css.kda}>
-                            <div  className={css.kdaUpperInfo}>                                
-                                {latest20SummaryInfo.kills} / {latest20SummaryInfo.assists} / {latest20SummaryInfo.deaths}
-                            </div>                            
-                            <div className={css.kdaBottomInfo}>                            
-                                <div>
-                                    {latest20SummaryInfo.kda.toFixed(2)} : 1 
-                                </div>
-                                <div className={css.winRatio}>
-                                    (58%)
-                                </div>
-                            </div>                            
+                            <div className={css.kdaInnerWrapper}>
+                                <div  className={css.kdaUpperInfo}>                                
+                                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitFirst}>
+                                        {latest20SummaryInfo.kills}
+                                    </div>
+                                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitCenter}>
+                                        {latest20SummaryInfo.assists}
+                                    </div>
+                                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitLast}>
+                                        {latest20SummaryInfo.deaths}
+                                    </div>                                                                                                 
+                                </div>                            
+                                <div className={css.kdaBottomInfo}>                            
+                                    <div>
+                                        {latest20SummaryInfo.kda.toFixed(2)} : 1 
+                                    </div>
+                                    <div className={css.winRatio}>
+                                        (58%)
+                                    </div>
+                                </div>  
+                            </div>
                         </div>
                         <div className={css.favoriteChampions}>
                             {latest20SummaryInfo.champions.map((v,i)=> {
@@ -112,7 +126,7 @@ export default function UserMain() {
                                 const winRatio = (v.wins / (v.wins + v.losses) * 100).toFixed(0)
                                 return (
                                     <div className={css.championInfoUnit} key={i}>
-                                        <div>
+                                        <div >
                                             <img className={css.championImg} src={v.imageUrl}></img>                                        
                                         </div>
                                         <div>
@@ -120,7 +134,7 @@ export default function UserMain() {
                                                 {v.name}                                            
                                             </div>
                                             <div className={css.championStatistics}>
-                                                <div className={css.championWinRatio}>{winRatio}%</div>
+                                                <div className={css.championWinRatio}>{winRatio}% </div>
                                                 <div className={css.winAndLose}>({v.wins}승 {v.losses}패)</div>
                                                 <div className={css.championKda}>{kda} 평점</div>
                                             </div>
@@ -132,9 +146,13 @@ export default function UserMain() {
                                 emptyChampionCount > 0 && [...Array(emptyChampionCount)].map((_, i)=> {
                                     return (
                                         <div key={i}>
-                                            <div>
-                                                <img width="34px" height="34px" src="./emptyChampion.png"></img>
-                                                챔피언 정보가 없습니다.
+                                            <div className={css.emptyChampionWrapper}>
+                                                <div className={css.emptyChampionImgWrapper}>
+                                                    <img width="34px" height="34px" src="./emptyChampion.png"></img>
+                                                </div>
+                                                <div  className={css.emptyChampionDescription}>
+                                                    챔피언 정보가 없습니다.
+                                                </div>                                                
                                             </div>
                                         </div>                                        
                                     )
@@ -155,7 +173,7 @@ export default function UserMain() {
                                 return (
                                     <div className={css.positionInfoWrapper} key={positionIdx}>
                                         <div>
-                                            <img src={positionImgUrl}></img>                                        
+                                            <img className={css.positionImg} src={positionImgUrl}></img>                                        
                                         </div>
                                         <div className={css.positionInfoDetail}>
                                             <div className={css.positionName}>{positionNameKor}</div> 

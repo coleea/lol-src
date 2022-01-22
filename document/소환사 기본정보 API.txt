@@ -1,0 +1,98 @@
+{
+  "summoner": {
+    "name": "Fake+Makeit",
+    "level": 33,
+    "profileImageUrl": "https://opgg-static.akamaized.net/images/profile_icons/profileIcon1625.jpg",
+    "profileBorderImageUrl": "https://opgg-static.akamaized.net/images/borders2/challenger.png",
+    "url": "https://www.op.gg/summoner/userName=Fake+Makeit",
+    "leagues": [
+      {
+        "hasResults": true,
+        "wins": 718,
+        "losses": 764,
+        "tierRank": {
+          "name": "솔랭",
+          "tier": "Bronze",
+          "tierDivision": "Bronze",
+          "string": "Bronze (235LP)",
+          "shortString": "B1",
+          "division": "i",
+          "imageUrl": "https://opgg-static.akamaized.net/images/medals/bronze_1.png",
+          "lp": 235,
+          "tierRankPoint": 352
+        }
+      },
+      {
+        "hasResults": true,
+        "wins": 824,
+        "losses": 617,
+        "tierRank": {
+          "name": "자유 5:5 랭크",
+          "tier": "Diamond",
+          "tierDivision": "Diamond",
+          "string": "Diamond (527LP)",
+          "shortString": "D1",
+          "division": "i",
+          "imageUrl": "https://opgg-static.akamaized.net/images/medals/diamond_1.png",
+          "lp": 527,
+          "tierRankPoint": 103
+        }
+      }
+    ],
+    "previousTiers": [
+      {
+        "name": "솔랭",
+        "tier": "Iron",
+        "tierDivision": "Iron",
+        "string": "Iron (508LP)",
+        "shortString": "I1",
+        "division": "i",
+        "imageUrl": "https://opgg-static.akamaized.net/images/medals/iron_1.png",
+        "lp": 508,
+        "tierRankPoint": 285,
+        "season": 9
+      },
+      {
+        "name": "솔랭",
+        "tier": "Iron",
+        "tierDivision": "Iron",
+        "string": "Iron (371LP)",
+        "shortString": "I1",
+        "division": "i",
+        "imageUrl": "https://opgg-static.akamaized.net/images/medals/iron_1.png",
+        "lp": 371,
+        "tierRankPoint": 494,
+        "season": 8
+      },
+      {
+        "name": "솔랭",
+        "tier": "Challenger",
+        "tierDivision": "Challenger",
+        "string": "Challenger (521LP)",
+        "shortString": "C1",
+        "division": "i",
+        "imageUrl": "https://opgg-static.akamaized.net/images/medals/challenger_1.png",
+        "lp": 521,
+        "tierRankPoint": 147,
+        "season": 7
+      },
+      {
+        "name": "솔랭",
+        "tier": "Challenger",
+        "tierDivision": "Challenger",
+        "string": "Challenger (454LP)",
+        "shortString": "C1",
+        "division": "i",
+        "imageUrl": "https://opgg-static.akamaized.net/images/medals/challenger_1.png",
+        "lp": 454,
+        "tierRankPoint": 340,
+        "season": 6
+      }
+    ],
+    "ladderRank": {
+      "rank": 444809,
+      "rankPercentOfTop": 68
+    },
+    "profileBackgroundImageUrl": "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Taliyah_0.jpg"
+  }
+}

@@ -9,30 +9,47 @@ const booleanToWinOrLoseMapper = {
     false : '패배',
 }
 const MultiKillNameEngToKorMapper = {
-    'Double Kill' : '더블킬'
+    'Double Kill' : '더블킬',
+    'Triple Kill' : '트리플킬',
 }
+
+const championNameEngToKor = {
+    Lucian : `루시안`,
+    Qiyana: `키아나`,
+    Malzahar: `말자하`,
+    Galio :`갈리오`,
+    Jayce :`제이스`,
+    Anivia :`애니비아`,
+    Tristana: `트리스티나`,
+    Viktor: `빅토리`,
+}
+
+const ICON_URL = { 
+    BUILD_RED : "//opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png",
+    BUILD_BLUE : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildblue-p.png`,
+    WARD_BLUE : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildblue-p.png`,
+    WARD_RED : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildblue-p.png`,     
+    BTN_WIN : "detail_btn_for_win.png",
+    BTN_LOSE : "detail_btn_for_lose.png",
+}
+const ITEM_INFO_URL = 'http://ddragon.leagueoflegends.com/cdn/10.15.1/data/ko_KR/item.json'
+
 
 export default function UserMain() {
 
     const [matchHistoryDetailInfo, setMatchHistoryDetailInfo]  = useRecoilState(matchHistoryDetailInfoAtom)
-    const itemToolTipRef = useRef(null)
+    const itemToolTipWrapperRef = useRef(null)
     const [itemsInfo, setItemsInfo] = useState()
-    
-    const requestItemsInfo = async () => {
-        const dbRes = await fetch('http://ddragon.leagueoflegends.com/cdn/10.15.1/data/ko_KR/item.json')
-                .then(r=>r.json())
-        // l('dbRes', dbRes.data)       
-        setItemsInfo(_ => dbRes.data)
-    }
-
-    useEffect(() => {
-        // l('itemsInfo', itemsInfo)
-    }, [itemsInfo])
-
 
     useEffect(() => {
         requestItemsInfo()
     }, [])
+
+    const requestItemsInfo = async () => {
+        const dbRes = await fetch(ITEM_INFO_URL)
+                .then(r=>r.json())
+        setItemsInfo(_ => dbRes.data)
+    }
 
     const calculatePassedTime = (v) => {
 
@@ -53,14 +70,15 @@ export default function UserMain() {
 
         const gamePlayMinutes =  (v.gameLength / 60) | 0
         const gamePlaySeconds =  (v.gameLength % 60)
-        const gamePlayHour =  (gamePlayMinutes / 60) | 0
+        const gamePlayHour    =  (gamePlayMinutes / 60) | 0
         return {gamePlaySeconds, gamePlayMinutes, gamePlayHour}
     }
 
     const showItemToolTip = e => {
 
-        itemToolTipRef.current.style.display = 'block'
-        const itemNumber = e.currentTarget.attributes.itemnumber.value
+        itemToolTipWrapperRef.current.style.display = 'block'
+        const itemElem = e.currentTarget
+        const itemNumber = itemElem.attributes.itemnumber.value
         const itemInfo = itemsInfo[itemNumber]
         const itemName = itemInfo.name
         const itemDescription = itemInfo.description
@@ -80,197 +98,241 @@ export default function UserMain() {
             </div>                 
         `
 
-        itemToolTipRef.current.innerHTML = itemHTML
-
+        itemToolTipWrapperRef.current.innerHTML = itemHTML
         const itemToolTipElem = document.querySelector('.itemToolTip')
 
-        // css.itemToolTipBottomSide
-
+        // POSITIONING
         if(e.clientY < itemToolTipElem.getBoundingClientRect().height + 200) {
-            l('아래로 배치할것')
-            const newY = e.currentTarget.offsetTop + e.currentTarget.getBoundingClientRect().height + 10
+            const newY = itemElem.offsetTop + itemElem.getBoundingClientRect().height + 10
             itemToolTipElem.style.top = newY + 'px'
 
-            const newX = e.currentTarget.offsetLeft - (itemToolTipElem.getBoundingClientRect().width / 2)
+            const newX = itemElem.offsetLeft - (itemToolTipElem.getBoundingClientRect().width / 2)
             itemToolTipElem.style.left = newX + 'px'
 
             itemToolTipElem.classList.remove(css.itemToolTipUpperSide)         
-
             itemToolTipElem.classList.add(css.itemToolTipBottomSide)
 
-            l('itemToolTipRef.current.classList', itemToolTipRef.current.classList)   
-
-            // itemToolTipUpperSideElem.style.top = 100 + 'px'
-
         } else {
-            const newY = e.currentTarget.offsetTop - itemToolTipElem.getBoundingClientRect().height - 13
+            // POSITIONING
+            const newY = itemElem.offsetTop - itemToolTipElem.getBoundingClientRect().height - 13
             itemToolTipElem.style.top = newY + 'px'
     
-            const newX = e.currentTarget.offsetLeft - (itemToolTipElem.getBoundingClientRect().width / 2)
-            itemToolTipElem.style.left = newX + 'px'
-    
+            const newX = itemElem.offsetLeft - (itemToolTipElem.getBoundingClientRect().width / 2)
+            itemToolTipElem.style.left = newX + 'px'    
         }
-
     }
 
     const hideItemToolTip = e => {
-        itemToolTipRef.current.style.display = 'none'
+        itemToolTipWrapperRef.current.style.display = 'none'
     }
 
     return (
         <>
             {matchHistoryDetailInfo && (
                 <div className={css.wrapper}>
-                    {matchHistoryDetailInfo.games.map((v,i)=> {
+                    {matchHistoryDetailInfo.games.map((matchInfo,matchInfoIdx)=> {
 
-                        const peakList = v.peak
-
-                        const passedTime = calculatePassedTime(v)
-
-                        const {gamePlaySeconds, gamePlayMinutes, gamePlayHour} = calculatePlayaTime(v)
-                        
-                        const championEngName = v.champion.imageUrl.split('/').at(-1).split('.')[0]
-                        // l('championEngName', championEngName)
-                        const kill = v.stats.general.kill
-                        const death = v.stats.general.death
-                        const assist = v.stats.general.assist 
-                        const kda =  ((kill + assist) / death).toFixed(2)
-                        const largestMultiKill = v.stats.general.largestMultiKillString
-                        const opScoreBadge = v.stats.general.opScoreBadge
-                        const cs = v.stats.general.cs
-                        const csPerMin = v.stats.general.csPerMin
-                        const contributionForKillRate = v.stats.general.contributionForKillRate
-                        const visionWardsBought = v.stats.ward.visionWardsBought
-                        // matchHistoryDetailInfo.gameDetailInfosById
-                        const blankItemNumber = 7 -v.items.length
-                        const CSSbattleResultType = v.isWin ? css.typeWin : css.typeLose 
-                        const CSSStatsBtn = v.isWin ? css.statsBtnWin : css.statsBtnLose
+                        const peakList = matchInfo.peak
+                        const passedTime = calculatePassedTime(matchInfo)
+                        const {gamePlaySeconds, gamePlayMinutes, gamePlayHour} = calculatePlayaTime(matchInfo)                        
+                        const championEngName = championNameEngToKor[
+                                                                     matchInfo.champion.imageUrl.split('/').at(-1).split('.')[0]
+                                                                    ] 
+                        const kill = matchInfo.stats.general.kill
+                        const death = matchInfo.stats.general.death
+                        const assist = matchInfo.stats.general.assist 
+                        const kda = death === 0 ? 
+                                (kill + assist) * 1.2 :
+                                ((kill + assist) / death).toFixed(2)
+                        const largestMultiKill = matchInfo.stats.general.largestMultiKillString
+                        const opScoreBadge = matchInfo.stats.general.opScoreBadge
+                        const cs = matchInfo.stats.general.cs
+                        const csPerMin = matchInfo.stats.general.csPerMin
+                        const contributionForKillRate = matchInfo.stats.general.contributionForKillRate
+                        const visionWardsBought = matchInfo.stats.ward.visionWardsBought
+                        const blankItemNumber = 7 -matchInfo.items.length
+                        const CSSbattleResultType = matchInfo.isWin ? css.typeWin : css.typeLose 
+                        const CSSStatsBtn = matchInfo.isWin ? css.statsBtnWin : css.statsBtnLose
+                        const isWin = booleanToWinOrLoseMapper[matchInfo.isWin]
+                        const multiKillNameKor = MultiKillNameEngToKorMapper[largestMultiKill]
 
                         return (
-                            <div className={css.detailGameInfo + ' ' + CSSbattleResultType } key={i}>
-                                <div className={css.gameStats}>
-                                    <div className={css.gameStatsUpper}>
-                                        <div className={css.gameType}>{v.gameType}</div>
-                                        <div>{passedTime}</div>
-                                    </div> 
-                                    <div>
-                                        <div>{booleanToWinOrLoseMapper[v.isWin]}</div>
-                                        <div>{gamePlayMinutes}분 {gamePlaySeconds}초</div>
-                                    </div>
-                                </div>
-                                <div className={css.gameSettingInfoWrapper}>
-                                    <div className={css.gameSettingInfo}>
-                                        <div>
-                                            <img className={css.championImg} src={v.champion.imageUrl}></img>
-                                        </div>
-                                        <div>
-                                            {v.spells.map((spell,spellIdx)=> {
-                                                return (
-                                                    <div key={spellIdx}>
-                                                        <img className={css.spellImg} src={spell.imageUrl}></img>
-                                                    </div>
-                                                )
-                                            })}                                    
-                                        </div>
-                                        <div>
-                                            {v.peak.map((peak, peakIdx)=> {
-                                                return (
-                                                    <div>
-                                                        <img className={css.spellImg} src={peak}></img>                                                    
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                    </div>
-                                    <div className={css.championEngName}>{championEngName}</div>
-                                </div>                   
-
-                                <div className={css.kdaWrapper}>
-                                    <div>{kill} / {death} / {assist}</div>
-                                    <div>{kda}:1 평점</div>           
-                                    {largestMultiKill && (
-                                        <div className={css.multiKillBadge}>
-                                            {MultiKillNameEngToKorMapper[largestMultiKill]}
-                                        </div>
-                                    )} 
-                                    {opScoreBadge && (
-                                        <div className={css.aceBadge}>
-                                            {opScoreBadge}
-                                        </div>
-                                    )}                                                            
-                                </div>
-                                <div className={css.statsWrapper}>
-                                    <div>레벨{v.champion.level}</div>
-                                    <div>{cs} ({csPerMin}) CS</div>
-                                    <div className={css.killInvolvement}>킬관여 {contributionForKillRate}</div>
-                                </div>
-                                <div className={css.itemsWrapper}>
-                                    <div className={css.items}>
-                                        {v.items.map((item,itemIdx)=> {
-                                            const itemNumber = item.imageUrl.split('/').at(-1).split('.png')[0]
-                                            // l('itemNumber', itemNumber)
-                                            return (
-                                                <div key={itemIdx}  onMouseEnter={showItemToolTip} onMouseLeave={hideItemToolTip} itemnumber={itemNumber}>
-                                                    <img  className={css.itemImg} src={item.imageUrl}></img>
-                                                </div>
-                                            )   
-                                        })}
-                                        {
-                                            [...Array(blankItemNumber)].map((blankItem, blankItemIdx)=> {
-                                                return (
-                                                    <div key={blankItemIdx}>
-                                                        <img  className={css.itemImg} src="./item_blank_icon.png"></img>                                                    
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                        <img className={css.itemImg} src="//opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png" ></img>
-                                    </div>
-                                    <div className={css.visionWardWrapper}>
-                                        <img className={css.wardImg} src="//opgg-static.akamaized.net/images/site/summoner/icon-ward-red.png"></img> 
-                                        제어 와드 {visionWardsBought}
-                                    </div>
-                                </div>                                        
-                                <div className={css.followPlayers}>
-                                    <div>
-                                        {v.detailInfos.red.players.map((player, playerIdx) => {
-                                            const playerName = player.summonerName.replace(/[\\+]/g,'')
-                                            const playerNameMod = playerName.length > 5 ? playerName.substring(0,5) + '...' :  playerName
-                                            return (
-                                                <div className={css.teamMemberWrapper} key={playerIdx}>
-                                                    <div>
-                                                        <img className={css.teamMemberImg} src={player.champion.imageUrl}></img>
-                                                    </div>                                                    
-                                                    <div className={css.teamMemberName}>{playerName}</div>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <div >
-                                        {v.detailInfos.blue.players.map((player, playerIdx) => {
-                                            const playerName = player.summonerName.replace(/[\\+]/g,'')
-                                            return (
-                                                <div className={css.teamMemberWrapper} key={playerIdx}>
-                                                    <div >
-                                                        <img className={css.teamMemberImg} src={player.champion.imageUrl}></img>
-                                                    </div>                                                    
-                                                    <div className={css.teamMemberName}>{playerName}</div>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>                                        
+                            <div className={css.detailGameInfo + ' ' + CSSbattleResultType } key={matchInfoIdx}>
+                                <GameStats matchInfo={matchInfo} isWin={isWin} gamePlayMinutes={gamePlayMinutes} gamePlaySeconds={gamePlaySeconds} passedTime={passedTime}  />
+                                <GameSettingInfo matchInfo={matchInfo} championEngName={championEngName} />
+                                <KDA kill={kill} death={death} assist={assist} kda={kda} largestMultiKill={largestMultiKill} multiKillNameKor={multiKillNameKor} opScoreBadge={opScoreBadge} />           
+                                <Stats matchInfo={matchInfo} cs={cs} csPerMin={csPerMin} contributionForKillRate={contributionForKillRate} />
+                                <Items matchInfo={matchInfo} showItemToolTip={showItemToolTip} hideItemToolTip={hideItemToolTip} blankItemNumber={blankItemNumber} isWin={isWin} visionWardsBought={visionWardsBought} />                                    
+                                <FollowPlayers matchInfo={matchInfo} />                                
+                                
                                 <div className={CSSStatsBtn}>                                    
-                                    <img className={css.statBtnImg}  src={v.isWin ? "detail_btn_for_win.png" : "detail_btn_for_lose.png"}></img>
+                                    <img className={css.statBtnImg} 
+                                            src={matchInfo.isWin ? ICON_URL.BTN_WIN : ICON_URL.BTN_LOSE}></img>
                                 </div>                             
                             </div>
                         )
                     })}
                 </div>
             )}
-            <div className={css.itemToolTipWrapper} ref={itemToolTipRef}>
+            <div className={css.itemToolTipWrapper} ref={itemToolTipWrapperRef}>
             </div>
             <div className='itemToolTipWrapper'></div>
         </>
+    )
+}
+
+
+function GameStats({matchInfo, isWin, gamePlayMinutes, gamePlaySeconds, passedTime}){
+    return (
+        <div className={css.gameStats}>
+            <div className={css.gameStatsUpper}>
+                <div className={css.gameType}>{matchInfo.gameType}</div>
+                <div>{passedTime}</div>
+            </div> 
+            <div className={css.isWinWrapper}>
+                <div className={isWin === '승리' ? css.win : css.lose}>
+                    {isWin}
+                </div>
+                <div>{gamePlayMinutes}분 {gamePlaySeconds}초</div>
+            </div>
+        </div>
+    )
+}
+
+function GameSettingInfo({matchInfo, championEngName}){
+    return (
+        <div className={css.gameSettingInfoWrapper}>
+            <div className={css.gameSettingInfo}>
+                <div>
+                    <img className={css.championImg} src={matchInfo.champion.imageUrl}></img>
+                </div>
+                <div>
+                    {matchInfo.spells.map((spell,spellIdx)=> {
+                        return (
+                            <div key={spellIdx}>
+                                <img className={css.spellImg} src={spell.imageUrl}></img>
+                            </div>
+                        )
+                    })}                                    
+                </div>
+                <div>
+                    {matchInfo.peak.map((peak, peakIdx)=> {
+                        return (
+                            <div key={peakIdx}>
+                                <img className={css.spellImg} src={peak}></img>                                                    
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+            <div className={css.championEngName}>{championEngName}</div>
+        </div>   
+    )
+}
+
+function KDA({kill, death, assist, kda, largestMultiKill, multiKillNameKor, opScoreBadge}){
+    return ( 
+        <div className={css.kdaWrapper}>
+            <div className={css.kda}>
+                <span className={css.kill}>{kill}</span>
+                <span className={css.death}>{death}</span>
+                <span className={css.assist}>{assist}</span>                                            
+            </div>
+            <div className={css.kdaCalculate}>
+                <span className={css.kda}>{kda}</span>
+                <span>:1 평점</span>                                        
+            </div>           
+            {largestMultiKill && (
+                <div className={css.multiKillBadge}>
+                    {multiKillNameKor}
+                </div>
+            )}
+            {opScoreBadge && (
+                <div className={css.aceBadge}>
+                    {opScoreBadge}
+                </div>
+            )}
+        </div>       
+    )
+}
+
+function Items({matchInfo, showItemToolTip, hideItemToolTip,blankItemNumber,isWin,visionWardsBought}){
+    return (
+        <div className={css.itemsWrapper}>
+            <div className={css.items}>
+                {matchInfo.items.map((item,itemIdx)=> {
+                    const itemNumber = item.imageUrl.split('/').at(-1).split('.png')[0]
+                    return (
+                        <div className={css.item} 
+                            key={itemIdx} 
+                            onMouseEnter={showItemToolTip} 
+                            onMouseLeave={hideItemToolTip} 
+                            itemnumber={itemNumber}>
+                            <img className={css.itemImg} src={item.imageUrl}></img>
+                        </div>
+                    )   
+                })}
+                {
+                    [...Array(blankItemNumber)].map((blankItem, blankItemIdx)=> {
+                        return (
+                            <div key={blankItemIdx}>
+                                <img  className={css.itemImg} src="./item_blank_icon.png"></img>                                                    
+                            </div>
+                        )
+                    })
+                }
+                <img className={css.itemImg} src={isWin === '승리' ? ICON_URL.BUILD_BLUE : ICON_URL.BUILD_RED}></img>
+            </div>
+            <div className={css.visionWardWrapper}>
+                <img className={css.wardImg} src={isWin === '승리' ? ICON_URL.WARD_BLUE : ICON_URL.WARD_RED}></img> 
+                제어 와드 {visionWardsBought}
+            </div>
+        </div>             
+    )
+}
+
+function FollowPlayers({matchInfo, }){
+    return (
+        <div className={css.followPlayers}>
+            <div>
+                {matchInfo.detailInfos.red.players.map((player, playerIdx) => {
+                    const playerName = player.summonerName.replace(/[\\+]/g,'')
+                    const playerNameMod = playerName.length > 5 ? playerName.substring(0,5) + '...' :  playerName
+                    return (
+                        <div className={css.teamMemberWrapper} key={playerIdx}>
+                            <div>
+                                <img className={css.teamMemberImg} src={player.champion.imageUrl}></img>
+                            </div>                                                    
+                            <div className={css.teamMemberName}>{playerName}</div>
+                        </div>
+                    )
+                })}
+            </div>
+            <div >
+                {matchInfo.detailInfos.blue.players.map((player, playerIdx) => {
+                    const playerName = player.summonerName.replace(/[\\+]/g,'')
+                    return (
+                        <div className={css.teamMemberWrapper} key={playerIdx}>
+                            <div >
+                                <img className={css.teamMemberImg} src={player.champion.imageUrl}></img>
+                            </div>                                                    
+                            <div className={css.teamMemberName}>{playerName}</div>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>          
+    )
+}
+
+function Stats({matchInfo, cs, csPerMin, contributionForKillRate}){
+    return (
+        <div className={css.statsWrapper}>
+            <div>레벨{matchInfo.champion.level}</div>
+            <div>{cs} ({csPerMin}) CS</div>
+            <div className={css.killInvolvement}>
+                킬관여 {contributionForKillRate}
+            </div>
+        </div>       
     )
 }

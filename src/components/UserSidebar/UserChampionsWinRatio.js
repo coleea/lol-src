@@ -4,123 +4,139 @@ import { useRecoilState } from 'recoil'
 import {userSidebarInfoAtom}  from '../../recoil/summonerInfo'
 
 const l = console.log
+const viewTypes = {
+    general : 'general',
+    _7days : '7days'
+}
+
+function sortChampionList(winRatioARr) {
+
+    if(winRatioARr){
+        const winRatioFreeSeasonClone = [...winRatioARr]
+        winRatioFreeSeasonClone.sort((a,b)=> { return (b.wins  + b.losses) - (a.wins  + a.losses)  })
+        return winRatioFreeSeasonClone
+
+    } else {
+        return winRatioARr
+    }
+}
 
 export default function UserMain({}) {
 
-    const [userSidebarInfo, setUserSidebarInfo]  = useRecoilState(userSidebarInfoAtom)
-
     const [viewtype, setviewtype] = useState('general')
 
-    const [winRatioInfo, setWinRatioInfo] = useState(null)
-    
-    const [winRatioFreeSeason, setWinRatioFreeSeason] = useState()
-    const [winRatio7Days, setWinRatio7Days] = useState()
-
-    useEffect(() => {
-        // l('winRatio7Days', winRatio7Days)
-    }, [winRatio7Days])
-
-    useEffect(() => {
-        // l('갱신됨 userSidebarInfo', userSidebarInfo)
-
-        userSidebarInfo && setWinRatioFreeSeason(_ => userSidebarInfo.winRatioFreeSeason)
-        userSidebarInfo && setWinRatio7Days(_ => userSidebarInfo.winRatio7Days)
-
-    }, [userSidebarInfo])
+    const [userSidebarInfo, setUserSidebarInfo]  = useRecoilState(userSidebarInfoAtom)
+    const winRatioFreeSeason = sortChampionList(userSidebarInfo?.winRatioFreeSeason)
+    const winRatio7Days      = sortChampionList(userSidebarInfo?.winRatio7Days) 
 
     const toggleviewtype = e => {
         const viewtype = e.target.attributes.viewtype.value
-        setviewtype(viewtype)
-        l('viewtype', viewtype)
-        if(viewtype === 'general') {
-            setWinRatioInfo(userSidebarInfo.winRatioFreeSeason)
-        } else if(viewtype === '7days') {
-            setWinRatioInfo(userSidebarInfo.winRatio7Days)            
-        }        
+        setviewtype(viewtype)          
     }
 
     return (
         <>
-            <div className={css.winRatioOption}>
-                <div className={css.winRatioType + ' ' + css.itemActive} onClick={toggleviewtype} viewtype='general'>챔피언 승률</div>
-                <div className={css.winRatioType} onClick={toggleviewtype} viewtype='7days'>7일간 랭크 승률</div>
-            </div>
+            <WinRatioToggleBar toggleviewtype={toggleviewtype} viewtype={viewtype} />
             {userSidebarInfo && (
                 <>
                     <div className={css.wrapper}>
-                        {viewtype === 'general' && winRatioFreeSeason && winRatioFreeSeason.map((v,i)=> {
-                            const totalGamesPlayed = v.wins  + v.losses
-                            const winRatio =  (v.wins / totalGamesPlayed * 100)  | 0
-                            const kda = ((v.kills + v.assists) / v.deaths).toFixed(2)
-                            return (
-                                <div className={css.championWinRateWrapper} key={i}>
-                                    <div>
-                                            <img className={css.championImg} src={v.imageUrl}></img>
-                                    </div>
-                                    <div>
-                                            <p className={css.upperContents}>{v.name}</p>
-                                            <p className={css.bottomContents}>CS {v.cs} (추가필요)</p>
-                                    </div>
-                                    <div>
-                                            <p className={css.upperContents}>{kda} : 1 평점</p>
-                                            <p className={css.bottomContents}>{v.kills} / {v.assists} / {v.deaths}</p>                               
-                                    </div>
-                                    <div>
-                                            <p className={css.upperContents}>{winRatio}%</p>
-                                            <p className={css.bottomContents}>{totalGamesPlayed}게임</p>                               
-                                    </div>                             
-                                </div>
-
+                        {viewtype === viewTypes.general && 
+                            winRatioFreeSeason && 
+                            winRatioFreeSeason.map((matchInfos,matchInfosIdx)=> 
+                                <ChampionWinRate matchInfos={matchInfos} matchInfosIdx={matchInfosIdx} />
                             )
-                        })}  
-                        {viewtype === '7days' && winRatio7Days.map((v,i)=> {
-                            const totalBattles = v.losses + v.wins
-                            const winRatio = (v.wins / totalBattles * 100).toFixed(0)
-                            const loseRatio = (v.losses / totalBattles * 100).toFixed(0)
-                            
-                            return (
-                                <div className={css.championWinRateWrapper} key={i}>                                    
-                                    <div>
-                                        <img className={css.championImg} src={v.imageUrl}></img>
-                                    </div>
-                                    <div>
-                                        {v.name}
-                                    </div>
-                                    <div>
-                                        {winRatio}%
-                                    </div>
-                                    <div className={css.winRatioBar}>
-                                        <div className={css.winBar} style={{flexBasis : `${winRatio}%`}}>
-                                            {v.wins}승
-                                        </div>
-                                        <div  className={css.loseBar} style={{flexBasis : `${loseRatio}%`}}>
-                                            {v.losses}패
-                                        </div>
-                                    </div>
-                                </div>
+                        }
+                        {viewtype === viewTypes._7days && 
+                            winRatio7Days.map((matchInfos,matchInfosIdx)=> 
+                                <_7daysWinRate matchInfos={matchInfos} matchInfosIdx={matchInfosIdx} />
                             )
-                        })
                         }
                     </div>             
                 </>
             )}
-
         </>
     )
 }
 
+function WinRatioToggleBar({toggleviewtype, viewtype}){
+    let cssChampionWinRaio = (viewtype === viewTypes.general) ? 
+                                css.winRatioType + ' ' + css.itemActive :
+                                css.winRatioType 
 
-    /* 
-        assists: 286
-        cs: 122
-        deaths: 204
-        games: 30
-        id: 126
-        imageUrl: "https://opgg-static.akamaized.net/images/lol/champion/Jayce.png?image=w_30&v=1"
-        key: "Jayce"
-        kills: 21
-        losses: 24
-        name: "제이스"
-        rank: 1
-        wins: 6
-    */
+    let css7Days = (viewtype === viewTypes._7days) ? 
+                                css.winRatioType + ' ' + css.itemActive :
+                                css.winRatioType ;
+
+    return (
+        <div className={css.winRatioOption}>
+            <div className={cssChampionWinRaio} 
+                onClick={toggleviewtype} viewtype='general'>
+                챔피언 승률
+            </div>
+            <div className={css7Days} 
+                onClick={toggleviewtype} viewtype='7days'>
+                7일간 랭크 승률
+            </div>
+        </div>
+    )
+}
+
+function ChampionWinRate({matchInfos, matchInfosIdx}){
+    
+    const totalGamesPlayed = matchInfos.wins  + matchInfos.losses
+    const winRatio =  (matchInfos.wins / totalGamesPlayed * 100)  | 0
+    const kda = ((matchInfos.kills + matchInfos.assists) / matchInfos.deaths).toFixed(2)
+    const cssKda = (kda > 3.5) ? css.upperContents + ' ' + css.kdaGreat : css.upperContents ;
+
+    return (        
+        <div className={css.championWinRateWrapper} key={matchInfosIdx}>
+            <div className={css.championImgWrapper}>
+                    <img className={css.championImg} src={matchInfos.imageUrl}></img>
+            </div>
+            <div>
+                    <p className={css.upperContents + ' ' + css.championName}>{matchInfos.name}</p>
+                    <p className={css.bottomContents}>CS {matchInfos.cs} (X)</p>
+            </div>
+            <div>
+                    <p className={cssKda}>{kda} : 1 평점</p>
+                    <p className={css.bottomContents}>{matchInfos.kills} / {matchInfos.assists} / {matchInfos.deaths}</p>
+            </div>
+            <div className={css._4thBlock}>
+                    <p className={css.upperContents}>{winRatio}%</p>
+                    <p className={css.bottomContents}>{totalGamesPlayed}게임</p>
+            </div>                             
+        </div>
+    )
+}
+
+function _7daysWinRate({matchInfos, matchInfosIdx}){
+    const totalBattles = matchInfos.losses + matchInfos.wins
+    const winRatio = (matchInfos.wins / totalBattles * 100).toFixed(0)
+    const loseRatio = (matchInfos.losses / totalBattles * 100).toFixed(0)
+    
+    return (
+        <div className={css.champion7DaysWinRateWrapper} key={matchInfosIdx}>                                    
+            <div className={css.championImgWrapper}>
+                <img className={css.championImg} src={matchInfos.imageUrl}></img>
+            </div>
+            <div className={css.name}>
+                {matchInfos.name}
+            </div>
+            <div className={css.winRatio}>
+                {winRatio}%
+            </div>
+            <div className={css.winRatioBar}>
+                <div className={css.winBar} style={{flexBasis : `${winRatio}%`}}>
+                    <div className={css.winCount}>
+                        {matchInfos.wins}승
+                    </div>
+                </div>
+                <div  className={css.loseBar} style={{flexBasis : `${loseRatio}%`}}>
+                    <div className={css.loseCount}>                    
+                        {matchInfos.losses}패
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

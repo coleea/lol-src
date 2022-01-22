@@ -7,12 +7,22 @@ import css from './Header.module.scss'
 
 const l = console.log 
 
-const INITIAL_USER_QUERY = 'Fake+Makeit'
+const INITIAL_USER_QUERY          = 'HELLO'
+const URL_TEMPLATE_BASIC_INFO     = `https://codingtest.op.gg/api/summoner/USERNAME`
+const URL_TEMPLATE_MOST_INFO      = `https://codingtest.op.gg/api/summoner/USERNAME/mostInfo`
+const URL_TEMPLATE_MATCHES        = `https://codingtest.op.gg/api/summoner/USERNAME/matches`
+const URL_TEMPLATE_MATCH_DETAILS  = `https://codingtest.op.gg/api/summoner/USERNAME/matchDetail/`
+const URL_BASE_FOR_AUTOCOMPLETE   = 'https://raw.githubusercontent.com/coleea/lol-src/master/api/autocomplete_fake.json'
+const URL_FOR_AUTOCOMPLETE_SERVER = process.env.REACT_APP_URL_FOR_AUTOCOMPLETE_SERVER
 
-const URL_TEMPLATE_BASIC_INFO = `https://codingtest.op.gg/api/summoner/USERNAME`
-const URL_TEMPLATE_MOST_INFO = `https://codingtest.op.gg/api/summoner/USERNAME/mostInfo`
-const URL_TEMPLATE_MATCHES = `https://codingtest.op.gg/api/summoner/USERNAME/matches`
-const URL_TEMPLATE_MATCH_DETAILS = `https://codingtest.op.gg/api/summoner/USERNAME/matchDetail/`
+async function fetchForAutocomplete(username){
+    const AUTOCOMPLETE_URL = URL_FOR_AUTOCOMPLETE_SERVER + 'username=' + username
+    const res = await fetch(AUTOCOMPLETE_URL).then(r=>r.json())
+    const autocompleteEntries = (res.length > 0 ) ?
+                                                res[0].groups[0].items : 
+                                                []
+    return autocompleteEntries
+}
 
 export default function Header() {
 
@@ -20,7 +30,8 @@ export default function Header() {
     const [favoriteUsers, setFavoriteUsers] = useState(JSON.parse(localStorage.favoriteUsers || '[]'))
     const [isInputExists, setIsInputExists]  = useState(false)
     const [isSearchbarFocused, setIsSearchbarFocused] = useState(false)
-    const [userHistoryType, setUserHistoryType] = useState('latestSearch')
+    const [historyViewType, setHistoryViewType] = useState('latestSearch')
+    const [autocompleteEntries , setAutocompleteEntries] = useState([])
     
     const searchHistoryWrapperRef = useRef(null)
     const searcBarRef = useRef(null)
@@ -105,7 +116,9 @@ export default function Header() {
             kills: matches.summary.kills,
             deaths: matches.summary.deaths,
             assists: matches.summary.assists,
-            kda : (matches.summary.kills + matches.summary.assists) / matches.summary.deaths,        
+            kda : matches.summary.deaths === 0 ?
+                (matches.summary.kills + matches.summary.assists) * 1.2
+                : (matches.summary.kills + matches.summary.assists) / matches.summary.deaths,        
             positions : matches.positions,
             champions : matches.champions,
         }
@@ -125,8 +138,7 @@ export default function Header() {
 
             const queryHistoryArrFiltered = queryHistory.filter(username => username !== query)                        
             const queryHistoryArrRenewed = [...queryHistoryArrFiltered, query]          
-            const queryHistoryArrStr = JSON.stringify(queryHistoryArrRenewed)
-            localStorage.queryHistory = queryHistoryArrStr 
+            localStorage.queryHistory = JSON.stringify(queryHistoryArrRenewed)
             return queryHistoryArrRenewed
 
         } else {
@@ -138,21 +150,18 @@ export default function Header() {
 
         e.preventDefault()
 
-        const query = Object
-                        .fromEntries(
-                            new FormData(e.target))
-                        .query
+        const query = Object.fromEntries(
+                                new FormData(e.target))
+                                    .query
 
-        getDataAndSetState(query) ; 
+        getDataAndSetState(query)
 
         const queryHistoryArrRenewed = saveQueryToDB(query)
 
         setQueryHistory(queryHistoryArrRenewed)
     }
 
-    const isCharInput = e =>  {
-        return e.key !== 'enter'
-    }
+    const isCharInput = e => e.key !== 'enter'    
 
     const doKeyInputCallback = async e => {
 
@@ -160,6 +169,11 @@ export default function Header() {
             const query = e.target.value
             query.length > 0 ? setIsInputExists(true)
                                 : setIsInputExists(false)
+
+            if(query.length > 0) {
+                const autocompleteEntries = await tryCacheForAutocomplete(query)                
+                setAutocompleteEntries(autocompleteEntries)                
+            }
         }            
     }
 
@@ -168,15 +182,8 @@ export default function Header() {
         const username = classStr.split(' ')[0]
 
         if(classStr.includes('favoriteOff')) {
-            l('여기')
             const favoriteUsersRenewed = [...favoriteUsers, username]
-            setFavoriteUsers(favoriteUsersRenewed)
-            /* 
-            setFavoriteUsers(prevState => {
-                const modifiedFavoriteUser = [...prevState, username]
-                return modifiedFavoriteUser
-            })
-            */
+            setFavoriteUsers(favoriteUsersRenewed)            
 
             const favoriteUserArr = JSON.parse(localStorage.favoriteUsers)
             const favoriteUserArrClone = [...favoriteUserArr]
@@ -184,8 +191,6 @@ export default function Header() {
             localStorage.favoriteUsers = JSON.stringify(favoriteUserArrClone)
 
         } else {
-            l('여기2')
-
             const userIdx = favoriteUsers.indexOf(username)
             const favoriteUserRenewed = [...favoriteUsers.slice(0, userIdx), 
                                          ...favoriteUsers.slice(userIdx + 1)]
@@ -202,30 +207,44 @@ export default function Header() {
     }
 
     const removeUserFromHistory = e=> {
-        const userName = e.target.attributes.userName.value        
-        const userNameIdx = queryHistory.indexOf(userName)
-        const queryHistoryClone = [...queryHistory]
-        const queryHistoryReNewed = [...queryHistoryClone.slice(0, userNameIdx), ...queryHistoryClone.slice(userNameIdx + 1)]        
+
+        const userName            = e.currentTarget.attributes.userName.value        
+        const userNameIdx         = queryHistory.indexOf(userName)
+        const queryHistoryClone   = [...queryHistory]
+        const queryHistoryReNewed = [...queryHistoryClone.slice(0, userNameIdx), ...queryHistoryClone.slice(userNameIdx + 1)]
+
         setQueryHistory(prev=> [...queryHistoryReNewed])
         localStorage.queryHistory = JSON.stringify(queryHistoryReNewed)
     }
 
     const onFocusSearchbar = e =>  setIsSearchbarFocused(true)    
 
-    const offFocusSearchbar = e => setIsSearchbarFocused(false)    
+    const offFocusSearchbar = e => {
+        setIsSearchbarFocused(false)            
+    }
 
-    const toggleHistoryType = e => {
+    const toggleViewType = e => {
         const viewType = e.target.attributes.viewtype.value 
-        setUserHistoryType(_ => viewType)
+        setHistoryViewType(_ => viewType)
     }
 
     const removeFromFavorite = e => {
-
-        const userName = e.target.attributes.userName.value
+        const userName = e.currentTarget.attributes.userName.value
         const userIdx =  favoriteUsers.indexOf(userName)
         const favoriteUsersRenewed = [...favoriteUsers.slice(0, userIdx), ...favoriteUsers.slice(userIdx + 1)]
         setFavoriteUsers(favoriteUsersRenewed)
         localStorage.favoriteUsers = JSON.stringify(favoriteUsersRenewed)
+    }
+        
+    function initializeQueryState(){
+        searcBarRef.current.value = ''
+        setIsInputExists(false)
+        offFocusSearchbar()
+    }
+
+    function queryUser({username}){        
+        getDataAndSetState(username)        
+        initializeQueryState()
     }
 
     return (
@@ -235,65 +254,29 @@ export default function Header() {
                     onBlur={offFocusSearchbar}
                     onFocus={onFocusSearchbar}
                     tabIndex="0"
-                >
-                 
-                    <InputQuery processUserSearch={processUserSearch} doKeyInputCallback={doKeyInputCallback} searcBarRef={searcBarRef} />
+                >                 
+                    <InputQuery 
+                        processUserSearch={processUserSearch} 
+                        doKeyInputCallback={doKeyInputCallback} searcBarRef={searcBarRef} />
 
                     { isSearchbarFocused && ! isInputExists && (
                         <div className={css.searchHistory} ref={searchHistoryWrapperRef}>
-                            <ul className={css.searchHistoryHeader}>
-                                <li className={css.searchHistoryHeaderUnit} onClick={toggleHistoryType} viewtype='latestSearch'>최근검색</li>
-                                <li className={css.searchHistoryHeaderUnit} onClick={toggleHistoryType} viewtype='favorite'>즐겨찾기</li>
-                            </ul>
-                            {
-                                userHistoryType === 'latestSearch' && (
-                                    <div className={css.RecentSummonerListWrap} >
-                                        {queryHistory.map((userName, userIdx)=> {
-                                            const isFavorite = favoriteUsers.some(favUser => favUser === userName)
-                                            return (
-                                                <div className={css.historyItem}>                                
-                                                    <div className={css.historyItem}>
-                                                        <div className={css.username}>
-                                                            {userName}
-                                                        </div>
-                                                        <div className={css.favoriteMark} onClick={toggleFavorite} >
-                                                            {isFavorite ? <img className={userName + ' ' + 'favoriteOn'} src="https://opgg-static.akamaized.net/images/site/icon-favorite-on.png"></img>
-                                                            : <img className={userName + ' ' + 'favoriteOff'} src="https://opgg-static.akamaized.net/images/site/icon-favorite-off.png"></img>}
-                                                        </div>
-                                                        <div className={css.removeMark} onClick={removeUserFromHistory} userName={userName}>
-                                                            X        
-                                                        </div>
-                                                    </div>
-                                                </div>                                   
-                                            )   
-                                        })}
-        
-                                    </div>        
-                                )
-                            }
-                            {
-                                userHistoryType === 'favorite' && (
-                                    <div>
-                                        {favoriteUsers.map((user, userIdx)=> {
-                                            return (
-                                                <div className={css.favoriteWrapper}>
-                                                    <div>
-                                                        {user}
-                                                    </div>
-                                                    <div className={css.removeMark} onClick={removeFromFavorite} userName={user}>
-                                                        X        
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                )    
-                            }                
+                            <SearchHistoryHeader toggleHistoryType={toggleViewType} historyViewType={historyViewType} />
+                            {historyViewType === 'latestSearch' && (
+                                <QueryHistory queryHistory={queryHistory} 
+                                    favoriteUsers={favoriteUsers} 
+                                    queryUser={queryUser} 
+                                    toggleFavorite={toggleFavorite} 
+                                    removeUserFromHistory={removeUserFromHistory} 
+                                />                                    
+                            )}
+                            {historyViewType === 'favorite' && (
+                                <FavoriteUsers favoriteUsers={favoriteUsers} queryUser={queryUser} removeFromFavorite={removeFromFavorite} />
+                            )}                
                         </div>
                     )}
-
                     {isSearchbarFocused && isInputExists && (
-                        <SearchAutocomplete />
+                        <SearchAutocomplete autocompleteEntries={autocompleteEntries} queryUser={queryUser}/>
                     )}
                 </div>
             </div>
@@ -301,6 +284,61 @@ export default function Header() {
     )
 }
 
+async function tryCacheForAutocomplete(query){
+
+    const today = new Date().toJSON().slice(0,10)
+    const todayCache = localStorage.getItem(today)
+
+    if(!todayCache) {
+
+        localStorage.setItem(today, `{}`)
+        const autocompleteEntries = await fetchForAutocomplete(query)
+        /* 
+        const todayCache = localStorage.getItem(today)
+        const todayCacheObj = JSON.parse(todayCache)
+        todayCacheObj[query] =  autocompleteEntries        
+        localStorage.setItem(today, JSON.stringify(todayCacheObj))
+         */
+        saveCacheToLocalStorage({today, query, autocompleteEntries})
+        return autocompleteEntries
+        
+    } else {
+        const todayCacheObj = JSON.parse(todayCache) 
+        const cacheResponse = todayCacheObj[query]
+
+        if(cacheResponse){
+            return cacheResponse
+        } else {            
+            const autocompleteEntries = await fetchForAutocomplete(query)
+            /* 
+            const todayCache = localStorage.getItem(today)
+            const todayCacheObj = JSON.parse(todayCache)
+            todayCacheObj[query] =  autocompleteEntries
+            localStorage.setItem(today, JSON.stringify(todayCacheObj))  
+            */
+            saveCacheToLocalStorage({today, query, autocompleteEntries})
+            return autocompleteEntries
+        }
+    }
+}
+
+function saveCacheToLocalStorage({today, query, autocompleteEntries}){
+    const todayCache = localStorage.getItem(today)
+    const todayCacheObj = JSON.parse(todayCache)
+    todayCacheObj[query] =  autocompleteEntries
+    localStorage.setItem(today, JSON.stringify(todayCacheObj))    
+}
+/* 
+async function fetchAutocompleteEntries({query, today}){
+
+    const dbres = await fetch(URL_BASE_FOR_AUTOCOMPLETE)
+                            .then(r=> r.json())
+    const autocompleteEntries  = dbres.sections[0].groups[0].items
+    // const autocompleteEntries2 =  await fetchForAutocomplete(query)
+    
+    return autocompleteEntries
+}
+ */
 function InputQuery({processUserSearch, doKeyInputCallback, searcBarRef}){
     return (
         <div className={css.inputQuery}>
@@ -321,16 +359,94 @@ function InputQuery({processUserSearch, doKeyInputCallback, searcBarRef}){
     )
 }
 
-function SearchAutocomplete({}){
+function QueryHistory({queryHistory, favoriteUsers, queryUser, toggleFavorite, removeUserFromHistory}){
+
+    const URL_IMG_FOR_FAVORITE_ON = "https://opgg-static.akamaized.net/images/site/icon-favorite-on.png"
+    const URL_IMG_FOR_FAVORITE_OFF = "https://opgg-static.akamaized.net/images/site/icon-favorite-off.png"
+    const URL_IMG_FOR_X_BTN = "./x_btn.png"
+
+    return (
+        <div className={css.RecentSummonerListWrap} >        
+            {queryHistory.map((userName, userIdx) => {
+                const isFavorite = favoriteUsers.some(favUser => favUser === userName)
+                return (
+                    <div className={css.historyItem}>                                
+                        <div className={css.historyItem}>
+                            <div className={css.username} onMouseDown={(e)=>{ queryUser({username :userName} ) }}>
+                                {userName}
+                            </div>
+                            <div className={css.favoriteMark} onClick={toggleFavorite} >
+                                {isFavorite ? 
+                                    <img className={userName + ' ' + 'favoriteOn'} src={URL_IMG_FOR_FAVORITE_ON}></img>
+                                    : <img className={userName + ' ' + 'favoriteOff'} src={URL_IMG_FOR_FAVORITE_OFF}></img>}
+                            </div>
+                            <div className={css.removeMark} onClick={removeUserFromHistory} userName={userName}>
+                                <img src={URL_IMG_FOR_X_BTN}></img>
+                            </div>
+                        </div>
+                    </div>                                   
+                )
+            })}        
+        </div>
+    )
+}
+
+function SearchHistoryHeader({toggleHistoryType, historyViewType}){
+    
+    return (
+        <ul className={css.searchHistoryHeader}>
+            <li className={historyViewType === `latestSearch` ? css.searchHistoryHeaderUnitOn : css.searchHistoryHeaderUnitOff } 
+                onMouseDown={toggleHistoryType} 
+                viewtype='latestSearch'>
+                    최근검색
+            </li>
+            <li className={historyViewType === `favorite` ? css.searchHistoryHeaderUnitOn : css.searchHistoryHeaderUnitOff} 
+                onMouseDown={toggleHistoryType} 
+                viewtype='favorite'>
+                    즐겨찾기
+            </li>
+        </ul>
+    )
+}
+
+function FavoriteUsers({favoriteUsers, queryUser, removeFromFavorite}){
+    return (
+        <div className={css.favoriteWrapper}>
+        {favoriteUsers.map((user, userIdx)=> {
+            return (
+                <div className={css.favoriteUnitWrapper}>
+                    <div  onMouseDown={()=> queryUser({username : user})}>
+                        {user}
+                    </div>
+                    <div className={css.removeMark} userName={user} onClick={removeFromFavorite}>
+                        <img src="x_btn.png"></img>      
+                    </div>
+                </div>
+            )
+        })}
+        </div>
+    )
+}
+
+function SearchAutocomplete({autocompleteEntries, queryUser}){
     return (
         <div className={css.autoCompleteWrapper}>
-            <div className={css.autoCompleteItem}>
-                <div className={css.autoCompleteUserImg}>이미지</div>
-                <div className={css.autoCompleteUserInfoWrapper}>
-                    <div className={css.autoCompleteUserName}>유저네임</div>
-                    <div className={css.autoCompleteUserLevel}>Level ?</div>
-                </div>
-            </div>                        
+            {autocompleteEntries.map((entry, entryIdx)=> {
+                const profileURL = entry.profileIconUrl.replace('//', 'https://')
+                return (
+                    <div>
+                        <div className={css.autoCompleteItem} onMouseDown={()=> queryUser({username : entry.name}) }>                    
+                            <div className={css.autoCompleteUserImgWrapper}>
+                                <img  className={css.autoCompleteUserImg} src={profileURL}></img>
+                            </div>
+                            <div className={css.autoCompleteUserInfoWrapper}>
+                                <div className={css.autoCompleteUserName}>{entry.name}</div>
+                                <div className={css.autoCompleteUserLevel}>Level {entry.level}</div>
+                            </div>
+                        </div>       
+                    </div>
+                )
+            })}                 
         </div>       
     )
 }

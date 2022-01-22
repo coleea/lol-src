@@ -13,12 +13,17 @@
     display: grid;
     // grid-template-columns : 114px 160px 228px 182px;
     grid-template-columns : 114px 161px 230px 184px;
-    height: 100%;
-    
+    height: 100%;    
+}
+
+.positionImg {
+    width: 28px;
+    height: 28px;
 }
 
 .positionInfoWrapper {
     display: flex;
+    margin-bottom : 15px ;
 }
 
 .winLoseStats {
@@ -53,8 +58,29 @@
 
 }    
 
+.kdaInnerWrapper {
+    position: relative;
+    top : 40px;
+}
+
 .kdaUpperInfo {
+    position: relative;
+    // top : 40px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.kdaUpperInfoUnitCenter{
+    color:#c6443e;
+}
+
+.kdaUpperInfoUnitFirst::after {
+    content: " /\00a0";
+}
+.kdaUpperInfoUnitCenter::after {
+    content: " /\00a0";
+    color: black;
 }
 
 .kdaBottomInfo {
@@ -62,6 +88,7 @@
     justify-content:center;
     color: #353a3a;
     font-size: 16px;
+    line-height: 36px;
 }
 
 .winRatio {
@@ -73,6 +100,7 @@
     height: 34px;   
     border-radius: 50%;
     overflow: hidden;
+    margin  : 0 10px 0 0;
 }
 
 .PositionStatContent {
@@ -96,18 +124,23 @@
 
 .championInfoUnit {
     display: flex;
-
+    margin : 0 0 10px 0 ;
     .championWinRatio {
         color: #c6443e;
         font-weight: bold;
+        margin-right : 5px ;
+
     }
 
     .winAndLose {
         color :#555555;
+        margin-right: 10px;
+        padding-right : 10px ;
+        border-right: 1px solid #e19205;
     }
 
     .championKda {
-        color :#e19205
+        color :#e19205;
     }
 }
 
@@ -135,6 +168,7 @@
         .positionName {
             font-weight: bold;
             color: #333333;
+            font-size: 14px;
         }
         
         .PositionStatContent{
@@ -142,13 +176,30 @@
             .roleRate{
                 color: #1f8ecd;
                 font-weight: bold;
+                // margin-right: 5px;
             }
             .positionWinRatioWrapper{
                 display: flex;
+                margin-left: 10px;
+                border-left : 1px solid #666666; 
+                padding-left: 5px;
                 .positionWinRate{
                     font-weight: bold;   
                 }
             }
         }   
+    }
+}
+
+.emptyChampionWrapper {
+    // position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    .emptyChampionDescription{
+        position: relative;
+        top : 10px ;
+        margin-left: 10px;
+        color: #999999;
+        // letter-spacing:0.005px;
     }
 }

@@ -1,0 +1,1293 @@
+{
+  "games": [
+    {
+      "mmr": 883,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+        "level": 11
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "292728896",
+      "createDate": 1642132487,
+      "gameLength": 2545,
+      "gameType": "무작위 총력전",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 8,
+          "death": 7,
+          "assist": 2,
+          "kdaString": "1.43:1",
+          "cs": 101,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "2%",
+          "goldEarned": 2535,
+          "totalDamageDealtToChampions": 6279,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 526,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png",
+        "level": 6
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3340.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "192281019",
+      "createDate": 1642129515,
+      "gameLength": 1901,
+      "gameType": "무작위 총력전",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 5,
+          "death": 10,
+          "assist": 1,
+          "kdaString": "0.60:1",
+          "cs": 138,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "48%",
+          "goldEarned": 3321,
+          "totalDamageDealtToChampions": 2870,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 792,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+        "level": 20
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "154595372",
+      "createDate": 1642126192,
+      "gameLength": 3042,
+      "gameType": "일반",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 1,
+          "death": 2,
+          "assist": 1,
+          "kdaString": "1.00:1",
+          "cs": 136,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "52%",
+          "goldEarned": 2664,
+          "totalDamageDealtToChampions": 4720,
+          "largestMultiKillString": "",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 2828,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+        "level": 11
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1026.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "392424746",
+      "createDate": 1642123270,
+      "gameLength": 1219,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 9,
+          "death": 5,
+          "assist": 4,
+          "kdaString": "2.60:1",
+          "cs": 192,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "1%",
+          "goldEarned": 4391,
+          "totalDamageDealtToChampions": 125,
+          "largestMultiKillString": "",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 1799,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Jayce.png",
+        "level": 12
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "453154038",
+      "createDate": 1642120711,
+      "gameLength": 1986,
+      "gameType": "자유 5:5 랭크",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 7,
+          "death": 3,
+          "assist": 2,
+          "kdaString": "3.00:1",
+          "cs": 180,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "55%",
+          "goldEarned": 2916,
+          "totalDamageDealtToChampions": 3255,
+          "largestMultiKillString": "",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 1845,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+        "level": 20
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1026.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1026.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "37754594",
+      "createDate": 1642118843,
+      "gameLength": 439,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 8,
+          "death": 4,
+          "assist": 4,
+          "kdaString": "3.00:1",
+          "cs": 187,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "8%",
+          "goldEarned": 4823,
+          "totalDamageDealtToChampions": 4416,
+          "largestMultiKillString": "",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 1047,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png",
+        "level": 6
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3020.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3020.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3340.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "430844280",
+      "createDate": 1642116765,
+      "gameLength": 930,
+      "gameType": "무작위 총력전",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 3,
+          "death": 4,
+          "assist": 1,
+          "kdaString": "1.00:1",
+          "cs": 178,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "3%",
+          "goldEarned": 1672,
+          "totalDamageDealtToChampions": 2372,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 3495,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Jayce.png",
+        "level": 12
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "42985874",
+      "createDate": 1642113305,
+      "gameLength": 1780,
+      "gameType": "무작위 총력전",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 7,
+          "death": 2,
+          "assist": 5,
+          "kdaString": "6.00:1",
+          "cs": 155,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "5%",
+          "goldEarned": 4420,
+          "totalDamageDealtToChampions": 536,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 1069,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+        "level": 20
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "224292628",
+      "createDate": 1642110502,
+      "gameLength": 671,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 4,
+          "death": 5,
+          "assist": 3,
+          "kdaString": "1.40:1",
+          "cs": 130,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "37%",
+          "goldEarned": 1741,
+          "totalDamageDealtToChampions": 854,
+          "largestMultiKillString": "",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 876,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+        "level": 11
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3340.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "312422029",
+      "createDate": 1642108205,
+      "gameLength": 2020,
+      "gameType": "일반",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 8,
+          "death": 1,
+          "assist": 5,
+          "kdaString": "13.00:1",
+          "cs": 145,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "8%",
+          "goldEarned": 557,
+          "totalDamageDealtToChampions": 1355,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 2138,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png",
+        "level": 6
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "41621513",
+      "createDate": 1642106217,
+      "gameLength": 2978,
+      "gameType": "자유 5:5 랭크",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 7,
+          "death": 6,
+          "assist": 5,
+          "kdaString": "2.00:1",
+          "cs": 140,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "9%",
+          "goldEarned": 4941,
+          "totalDamageDealtToChampions": 6999,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 1534,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Malzahar.png",
+        "level": 6
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1026.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "232076610",
+      "createDate": 1642103727,
+      "gameLength": 1593,
+      "gameType": "일반",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 4,
+          "death": 1,
+          "assist": 2,
+          "kdaString": "6.00:1",
+          "cs": 105,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "25%",
+          "goldEarned": 1209,
+          "totalDamageDealtToChampions": 2560,
+          "largestMultiKillString": "",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 2623,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+        "level": 11
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3020.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "277592191",
+      "createDate": 1642101555,
+      "gameLength": 3075,
+      "gameType": "자유 5:5 랭크",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 1,
+          "death": 6,
+          "assist": 2,
+          "kdaString": "0.50:1",
+          "cs": 154,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "33%",
+          "goldEarned": 754,
+          "totalDamageDealtToChampions": 3840,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 943,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Lucian.png",
+        "level": 9
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3340.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "337528346",
+      "createDate": 1642098322,
+      "gameLength": 2228,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 4,
+          "death": 9,
+          "assist": 2,
+          "kdaString": "0.67:1",
+          "cs": 185,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "6%",
+          "goldEarned": 4569,
+          "totalDamageDealtToChampions": 2321,
+          "largestMultiKillString": "",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 227,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Galio.png",
+        "level": 20
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3340.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "397910243",
+      "createDate": 1642094780,
+      "gameLength": 1366,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 8,
+          "death": 5,
+          "assist": 4,
+          "kdaString": "2.40:1",
+          "cs": 117,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "33%",
+          "goldEarned": 71,
+          "totalDamageDealtToChampions": 4186,
+          "largestMultiKillString": "",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 3031,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Qiyana.png",
+        "level": 3
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3020.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "350501606",
+      "createDate": 1642091841,
+      "gameLength": 2149,
+      "gameType": "무작위 총력전",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 3,
+          "death": 6,
+          "assist": 5,
+          "kdaString": "1.33:1",
+          "cs": 184,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "33%",
+          "goldEarned": 5286,
+          "totalDamageDealtToChampions": 3471,
+          "largestMultiKillString": "",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": 407,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Qiyana.png",
+        "level": 3
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "308317379",
+      "createDate": 1642089475,
+      "gameLength": 631,
+      "gameType": "일반",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 10,
+          "death": 1,
+          "assist": 2,
+          "kdaString": "12.00:1",
+          "cs": 199,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "9%",
+          "goldEarned": 2801,
+          "totalDamageDealtToChampions": 1965,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": null,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Tristana.png",
+        "level": 7
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/2031.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3340.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "151003508",
+      "createDate": 1642086577,
+      "gameLength": 10,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 0,
+          "death": 0,
+          "assist": 0,
+          "kdaString": "0.00:1",
+          "cs": 183,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "27%",
+          "goldEarned": 5208,
+          "totalDamageDealtToChampions": 1994,
+          "largestMultiKillString": "",
+          "opScoreBadge": ""
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    },
+    {
+      "mmr": 2472,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png",
+        "level": 11
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1026.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3113.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/1056.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "215672568",
+      "createDate": 1642083255,
+      "gameLength": 598,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 10,
+          "death": 5,
+          "assist": 5,
+          "kdaString": "3.00:1",
+          "cs": 132,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "16%",
+          "goldEarned": 5121,
+          "totalDamageDealtToChampions": 2974,
+          "largestMultiKillString": "",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": true
+    },
+    {
+      "mmr": null,
+      "champion": {
+        "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Jayce.png",
+        "level": 12
+      },
+      "spells": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerTeleport.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png"
+        }
+      ],
+      "items": [
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3198.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3020.png"
+        },
+        {
+          "imageUrl": "https://opgg-static.akamaized.net/images/lol/item/3364.png"
+        }
+      ],
+      "needRenew": false,
+      "gameId": "191439676",
+      "createDate": 1642081245,
+      "gameLength": 250,
+      "gameType": "솔랭",
+      "summonerId": "67500114",
+      "summonerName": "Fake+Makeit",
+      "tierRankShort": "C1",
+      "stats": {
+        "general": {
+          "kill": 0,
+          "death": 0,
+          "assist": 0,
+          "kdaString": "0.00:1",
+          "cs": 175,
+          "csPerMin": 7.5,
+          "contributionForKillRate": "45%",
+          "goldEarned": 5119,
+          "totalDamageDealtToChampions": 5714,
+          "largestMultiKillString": "Double Kill",
+          "opScoreBadge": "ACE"
+        },
+        "ward": {
+          "sightWardsBought": 0,
+          "visionWardsBought": 2
+        }
+      },
+      "mapInfo": null,
+      "peak": [
+        "https://opgg-static.akamaized.net/images/lol/perk/8229.png",
+        "https://opgg-static.akamaized.net/images/lol/perkStyle/8300.png"
+      ],
+      "isWin": false
+    }
+  ],
+  "champions": [
+    {
+      "id": 45,
+      "key": "Veigar",
+      "name": "베이가",
+      "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Veigar.png?image=q_auto&v=1591083841",
+      "games": 14,
+      "kills": 2,
+      "deaths": 11,
+      "assists": 19,
+      "wins": 1,
+      "losses": 13
+    },
+    {
+      "id": 126,
+      "key": "Jayce",
+      "name": "제이스",
+      "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Jayce.png?image=w_30&v=1",
+      "games": 4,
+      "kills": 16,
+      "deaths": 2,
+      "assists": 10,
+      "wins": 4,
+      "losses": 0
+    },
+    {
+      "id": 112,
+      "key": "Viktor",
+      "name": "빅토르",
+      "imageUrl": "https://opgg-static.akamaized.net/images/lol/champion/Viktor.png?image=w_30&v=1",
+      "games": 2,
+      "kills": 5,
+      "deaths": 4,
+      "assists": 3,
+      "wins": 1,
+      "losses": 1
+    }
+  ],
+  "positions": [
+    {
+      "games": 18,
+      "wins": 10,
+      "losses": 8,
+      "position": "JNG",
+      "positionName": "Jungle"
+    },
+    {
+      "games": 2,
+      "wins": 2,
+      "losses": 0,
+      "position": "ADC",
+      "positionName": "Bottom"
+    }
+  ],
+  "summary": {
+    "wins": 6,
+    "losses": 14,
+    "kills": 23,
+    "deaths": 17,
+    "assists": 32
+  }
+}

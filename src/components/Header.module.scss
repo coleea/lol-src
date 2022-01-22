@@ -3,110 +3,133 @@ ul, li {
     margin: 0;
     padding: 0;
 }
-
-
+  
 .wrapper {
-    // width: 100vw;
-    // min-height: 10vh;
-    // position : fixed ;
-    // top : 0 ;
     height: 97px;
     background-color: #1ea1f7 ;
-    // display: flex;
-    // flex-direction: row-reverse;
+
+    .userInputWrapper {
+        position: relative;
+        padding : 0 ;
+        margin : 0 ;
+        margin-left: 64%;
+        top : 50%;
+        width: 250px;
+
+        .inputQuery {
+
+            .input_query {
+                width: 100%;
+                height: 32px;
+                border : 0px solid  ;
+                border-radius: 2px;
+                background-color: white;
+                font-size: 12px;
+            }
+    
+            .submitBtn {
+                position: relative;
+                top : -30px;
+                left : 80% ;
+                height: 32px;
+                width: 54px;
+                text-align: center;
+                background: none;
+                border: none;
+                line-height: 32px;
+            }
+        }
+
+        .searchHistory {
+            position: relative;
+            top : -30px ;
+            width: 102% ;
+            border-radius : 2px ;
+            box-shadow: 0 2px 4px 0 rgb(0 0 0 /50%);
+            background: #fff;
+            z-index: 9999;
+            font-size: 12px;
+
+            .searchHistoryHeader {
+                width: 100% ;
+                display: grid;
+                grid-template-columns: 50% 50%;
+                line-height: 40px;
+            
+                .searchHistoryHeaderUnit{
+                    display: table-cell;
+                    background: #e3e3e3;
+                    text-align: center;
+                }
+                .searchHistoryHeaderUnitOn{
+                    display: table-cell;
+                    background: #fff;
+                    text-align: center;
+                }
+                .searchHistoryHeaderUnitOff{
+                    display: table-cell;
+                    background: #e3e3e3;
+                    text-align: center;
+                }
+            }            
+        }
+        
+        .RecentSummonerListWrap {
+            display: flex;    
+            flex-direction: column-reverse;
+            padding : 10px 0 10px 0 ;
+            // padding : 20px ;
+        
+            .historyItem {
+                display: grid;
+                grid-template-columns: 170px 1fr 1fr;
+                margin : 0 10px 0 10px;
+                line-height: 30px;
+                .removeMark {
+                    margin : 0 0px 0 10px ;
+                }
+            }            
+        }
+         
+        .favoriteWrapper {
+            margin : 20px 0 50px 0;
+            padding : 0 0 5px 0 ;
+            .favoriteUnitWrapper {
+                display: flex;
+                justify-content: space-between;
+                margin : 0 15px 10px 15px ;
+            }
+        }
+
+        .autoCompleteWrapper {
+            position: relative;
+            top : -30px ;
+            width: 100% ;
+            border-radius : 2px ;
+            box-shadow: 0 2px 4px 0 rgb(0 0 0 /50%);
+            background: #fff;
+            padding: 15px 0 1px 0;
+            z-index: 99;
+            
+            .autoCompleteItem {        
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                margin : 0 120px 20px 20px;
+        
+                .autoCompleteUserImg{
+                    width: 36px;
+                    height: 36px;
+                    margin-right: 14px;
+                    border-radius: 50%;
+                }
+            }        
+        }    
+    }    
 }
 
-.userInputWrapper {
-    position: relative;
-    padding : 0 ;
-    margin : 0 ;
-    margin-left: 64%;
-    top : 50%;
-    width: 250px;
 
-    // font-size: 12px;
-    // margin-top: 3%;
-    // top : 50px ;
-    // width: 260px;
-    // height: 32px;
 
-}
 
-.input_query {
-    // font-size: 2rem;
-    // margin: 1em 0 0 0;
-    // margin-left: 70%;
-    // margin-top: 3%;
 
-    // margin-left: 919px;
-    // margin-top: 53px;
 
-    width: 100%;
-    height: 32px;
 
-    // padding: 9px 12px 8px 14px;
-    border : 0px solid  ;
-    border-radius: 2px;
-    background-color: white;
-    font-size: 12px;
-    // left : 919px;
-}
-
-.submitBtn {
-    position: relative;
-    // top : 4px;
-    top : -30px;
-    left : 80% ;
-    // top : -0%;
-    // margin-left: 80%;
-    // margin-top : -60px ;
-    // top : 5000px ;
-    // margin-top: 2.5%;
-    // top: 56px;
-    // left: 1360px;
-    // margin-right: 5%;
-    height: 32px;
-    width: 54px;
-    text-align: center;
-    background: none;
-    border: none;
-    line-height: 32px;
-}
-
-.searchHistory, .autoCompleteWrapper {
-    position: relative;
-    top : -30px ;
-    width: 100% ;
-    border-radius : 2px ;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 /50%);
-    background: #fff;
-}
-
-.searchHistoryHeader {
-    width: 100% ;
-    // display: flex;
-    // justify-content: space-evenly;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    line-height: 40px;
-}
-
-.searchHistoryHeaderUnit{
-    display: table-cell;
-    background: #e3e3e3;
-    text-align: center;
-}
-
-.RecentSummonerListWrap {
-    display: flex;    
-    flex-direction: column-reverse;
-}
-
-.historyItem {
-    display: grid;
-    grid-template-columns: 15fr 1fr 1fr;
-}
-
-.favoriteWrapper {
-    display: flex;
-}

@@ -18,9 +18,18 @@ export default function UserMain() {
         <>
             <div className={css.wrapper}>
                 <div className={css.gameCategory}>
-                    <div className={currentGameType === 'all' ? `${css.CategoryAll} ${css.focusdMenu}` : css.CategoryAll } onClick={toogleGameType} type="all">전체</div>
-                    <div className={currentGameType === 'solo' ? `${css.CategorySolo} ${css.focusdMenu}` : css.CategorySolo } onClick={toogleGameType} type="solo">솔로게임</div>
-                    <div className={currentGameType === 'free' ? `${css.CategoryFree} ${css.focusdMenu}` : css.CategoryFree  } onClick={toogleGameType} type="free">자유랭크</div>
+                    <div className={currentGameType === 'all' ? 
+                                                            `${css.CategoryAll} ${css.focusdMenu}` 
+                                                            : css.CategoryAll } 
+                                                            onClick={toogleGameType} type="all">전체</div>
+                    <div className={currentGameType === 'solo' ? 
+                                                            `${css.CategorySolo} ${css.focusdMenu}` 
+                                                            : css.CategorySolo } 
+                                                            onClick={toogleGameType} type="solo">솔로게임</div>
+                    <div className={currentGameType === 'free' ? 
+                                                            `${css.CategoryFree} ${css.focusdMenu}` 
+                                                            : css.CategoryFree  } 
+                                                            onClick={toogleGameType} type="free">자유랭크</div>
                 </div>
                 <UserGameSummary/>
                 <UserDetailGameInfo/>
