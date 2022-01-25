@@ -184,10 +184,14 @@ function ChampionInfos({latest20SummaryInfo, emptyChampionCount,}) {
     return (
     <div className={css.favoriteChampions}>
         {latest20SummaryInfo.champions.map((v,i)=> {
-            const winRatio = (v.wins / (v.wins + v.losses) * 100).toFixed(0)
+            const winRatio = v.wins / (v.wins + v.losses) * 100
+            const winRatioStr = winRatio.toFixed(0)
             const kdaStr = ((v.kills + v.assists) / v.deaths).toFixed(0)
             const kda = (v.kills + v.assists) / v.deaths
             const cssKDA = kda > 6 ? css.kdaOver6 : css.kdaNm
+            const cssWinRatio = winRatio >= 60 ? css.winRatioGreat : css.winRatioNm
+
+
 
             return (
                 <div className={css.championInfoUnit} key={i}>
@@ -199,7 +203,7 @@ function ChampionInfos({latest20SummaryInfo, emptyChampionCount,}) {
                             {v.name}                                            
                         </div>
                         <div className={css.championStatistics}>
-                            <div className={css.championWinRatio}>{winRatio}% </div>
+                            <div className={cssWinRatio}>{winRatioStr}% </div>
                             <div className={css.winAndLose}>({v.wins}승 {v.losses}패)</div>
                             <div className={cssKDA}>{kdaStr} 평점</div>
                         </div>

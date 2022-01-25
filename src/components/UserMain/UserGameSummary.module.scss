@@ -114,11 +114,16 @@
                     overflow: hidden;
                     margin  : 0 10px 0 0;
                 }       
-                .championWinRatio {
-                    color: #c6443e;
+                .winRatioNm {
+                    // color: #c6443e;
                     font-weight: bold;
                     margin-right : 5px ;
                 }
+                .winRatioGreat {
+                    color: #c6443e;
+                    font-weight: bold;
+                    margin-right : 5px ;
+                }                
                 .championKda {
                     color :#cdd2d2;
                 }
