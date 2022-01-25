@@ -34,12 +34,17 @@ yarn을 쓰는경우 커맨드라인에서 `yarn 입력후` `yarn dev`를 입력
 ---
 ## Perforomance
 
-1. FCP : 1074 ~ 1412ms
+1. FCP : 706 ~ 1412ms
 1. TTFB : 19 ~ 337ms
-
 ---
 
+## 컴포넌트 설명
+
+<img src="./githubFile/components_summary.png"></img>
+
+
 ## 참고사항
+
 1. 최근검색 항목 및 즐겨찾기 데이터는 localstorage에 저장됩니다
 1. autocomplete 데이터는 `http://lol-api.devkr.info`를 경유하여 `https://www.op.gg/ajax/autocomplete.json`에서 응답받습니다
 1. `http://lol-api.devkr.info`는 오토컴플리트 API의 프록시 서버이며 상세 코드는 루트 디렉토리의 `fastify-server-for-autocomplete` 폴더에 있습니다.\

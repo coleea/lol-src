@@ -17,8 +17,8 @@ export default function UserSidebar() {
     const [winRatioType, setWinRatioType] = useState(winRatioTypeMapper.freeSeasion)
     const winRatioInfo =  userSidebarInfo ? 
                                 (winRatioType === winRatioTypeMapper.freeSeasion) ? 
-                                    userSidebarInfo.winRatioFreeSeason 
-                                    : userSidebarInfo.winRatio7Days
+                                                                        userSidebarInfo.winRatioFreeSeason 
+                                                                        : userSidebarInfo.winRatio7Days
                                 : null 
 
     return (

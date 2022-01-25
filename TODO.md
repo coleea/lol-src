@@ -1,9 +1,5 @@
 # TODO
 
-1. 주의 user summary에서 kda 카테고리의 괄호는 승률이 아님. 킬관여율이다
-    1. 킬관여율 평균은 match 정보의 킬관여율을 평균내서 구할것
-1. 이미지에 alt 추가할것
-
 1. [DONE] React Router로 http://localhost:3000/user/:유저네임 경로 구현할것
 1. [DONE] user detail game info CSS 리팩토링하기
 1. [DONE] user game summary CSS 리팩토링하기

@@ -31,7 +31,7 @@ export default function UserMain() {
     const [currentGameType, setCurrentGameType] = useState('all')
 
     const [latest20SummaryInfo, setLatest20SummaryInfo]         = useRecoilState(latest20SummaryInfoAtom)
-    const [currentSummary, setCurrentSummary] = useState()
+    const [currentSummary, setCurrentSummary]                   = useState()
 
     const [matchHistoryDetailInfo, setMatchHistoryDetailInfo]   = useRecoilState(matchHistoryDetailInfoAtom)
     const [currentMatchHistoryInfo, setCurrentMatchHistoryInfo] = useState(matchHistoryDetailInfo)
@@ -87,7 +87,7 @@ export default function UserMain() {
     
         championObj.games++
         gameInfo.isWin ? championObj.wins++ 
-                : championObj.losses++
+                       : championObj.losses++
         championObj.winRatio = (championObj.wins / championObj.games * 100).toFixed(0) + '%'
 
         championObj.kills   += gameInfo.stats.general.kill
@@ -95,7 +95,7 @@ export default function UserMain() {
         championObj.assists += gameInfo.stats.general.assist
         championObj.kda     =  championObj.deaths === 0 ? 
                                         (championObj.kills + championObj.assists) * 1.2 
-                                        : (championObj.kills + championObj.assists) / championObj.deaths
+                                      : (championObj.kills + championObj.assists) / championObj.deaths
 
         championObj.key = championEngName ;
         championObj.name = championNameEngToKor[championEngName];

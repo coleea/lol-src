@@ -160,15 +160,12 @@ export default function Header() {
     const processUserSearch = e => {
 
         e.preventDefault()
-
         const query = Object.fromEntries(
                                 new FormData(e.target))
                                     .query
 
         getDataAndSetState(query)
-
         const queryHistoryArrRenewed = saveQueryToDB(query)
-
         setQueryHistory(queryHistoryArrRenewed)
     }
 
@@ -220,7 +217,7 @@ export default function Header() {
 
     const removeUserFromHistory = e=> {
 
-        const userName            = e.currentTarget.attributes.userName.value        
+        const userName            = e.currentTarget.attributes.username.value        
         const userNameIdx         = queryHistory.indexOf(userName)
         const queryHistoryClone   = [...queryHistory]
         const queryHistoryReNewed = [...queryHistoryClone.slice(0, userNameIdx), ...queryHistoryClone.slice(userNameIdx + 1)]
@@ -307,12 +304,6 @@ async function tryCacheForAutocomplete(query){
 
         localStorage.setItem(today, `{}`)
         const autocompleteEntries = await fetchForAutocomplete(query)
-        /* 
-        const todayCache = localStorage.getItem(today)
-        const todayCacheObj = JSON.parse(todayCache)
-        todayCacheObj[query] =  autocompleteEntries        
-        localStorage.setItem(today, JSON.stringify(todayCacheObj))
-         */
         saveCacheToLocalStorage({today, query, autocompleteEntries})
         return autocompleteEntries
         
@@ -324,12 +315,6 @@ async function tryCacheForAutocomplete(query){
             return cacheResponse
         } else {            
             const autocompleteEntries = await fetchForAutocomplete(query)
-            /* 
-            const todayCache = localStorage.getItem(today)
-            const todayCacheObj = JSON.parse(todayCache)
-            todayCacheObj[query] =  autocompleteEntries
-            localStorage.setItem(today, JSON.stringify(todayCacheObj))  
-            */
             saveCacheToLocalStorage({today, query, autocompleteEntries})
             return autocompleteEntries
         }
@@ -342,17 +327,7 @@ function saveCacheToLocalStorage({today, query, autocompleteEntries}){
     todayCacheObj[query] =  autocompleteEntries
     localStorage.setItem(today, JSON.stringify(todayCacheObj))    
 }
-/* 
-async function fetchAutocompleteEntries({query, today}){
 
-    const dbres = await fetch(URL_BASE_FOR_AUTOCOMPLETE)
-                            .then(r=> r.json())
-    const autocompleteEntries  = dbres.sections[0].groups[0].items
-    // const autocompleteEntries2 =  await fetchForAutocomplete(query)
-    
-    return autocompleteEntries
-}
- */
 function InputQuery({processUserSearch, doKeyInputCallback, searcBarRef}){
     return (
         <div className={css.inputQuery}>
@@ -384,17 +359,17 @@ function QueryHistory({queryHistory, favoriteUsers, queryUser, toggleFavorite, r
             {queryHistory.map((userName, userIdx) => {
                 const isFavorite = favoriteUsers.some(favUser => favUser === userName)
                 return (
-                    <div className={css.historyItem}>                                
+                    <div className={css.historyItem} key={userIdx}>                                
                         <div className={css.historyItem}>
                             <div className={css.username} onMouseDown={(e)=>{ queryUser({username :userName} ) }}>
                                 {userName}
                             </div>
-                            <div className={css.favoriteMark} onClick={toggleFavorite} username={userName}>
+                            <div className={css.favoriteMark} onMouseDown={toggleFavorite} username={userName}>
                                 {isFavorite ? 
                                     <img className={userName + ' ' + 'favoriteOn'} src={URL_IMG_FOR_FAVORITE_ON}></img>
                                     : <img className={userName + ' ' + 'favoriteOff'} src={URL_IMG_FOR_FAVORITE_OFF}></img>}
                             </div>
-                            <div className={css.removeMark} onClick={removeUserFromHistory} userName={userName}>
+                            <div className={css.removeMark} onMouseDown={removeUserFromHistory} username={userName}>
                                 <img src={URL_IMG_FOR_X_BTN}></img>
                             </div>
                         </div>
@@ -428,11 +403,11 @@ function FavoriteUsers({favoriteUsers, queryUser, removeFromFavorite}){
         <div className={css.favoriteWrapper}>
         {favoriteUsers.map((user, userIdx)=> {
             return (
-                <div className={css.favoriteUnitWrapper}>
+                <div className={css.favoriteUnitWrapper} key={userIdx}>
                     <div  onMouseDown={()=> queryUser({username : user})}>
                         {user}
                     </div>
-                    <div className={css.removeMark} userName={user} onClick={removeFromFavorite}>
+                    <div className={css.removeMark} userName={user} onMouseDown={removeFromFavorite}>
                         <img src="/x_btn.png"></img>      
                     </div>
                 </div>
@@ -448,7 +423,7 @@ function SearchAutocomplete({autocompleteEntries, queryUser}){
             {autocompleteEntries.map((entry, entryIdx)=> {
                 const profileURL = entry.profileIconUrl.replace('//', 'https://')
                 return (
-                    <div>
+                    <div key={entryIdx}>
                         <div className={css.autoCompleteItem} onMouseDown={()=> queryUser({username : entry.name}) }>                    
                             <div className={css.autoCompleteUserImgWrapper}>
                                 <img  className={css.autoCompleteUserImg} src={profileURL}></img>

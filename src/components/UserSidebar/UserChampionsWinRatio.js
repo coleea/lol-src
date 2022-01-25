@@ -72,9 +72,12 @@ function WinRatioToggleBar({toggleviewtype, viewtype}){
 function ChampionWinRate({matchInfos, matchInfosIdx}){
     
     const totalGamesPlayed = matchInfos.wins  + matchInfos.losses
-    const winRatio =  (matchInfos.wins / totalGamesPlayed * 100)  | 0
+    const winRatio =  (matchInfos.wins / totalGamesPlayed * 100) | 0
     const kda = ((matchInfos.kills + matchInfos.assists) / matchInfos.deaths).toFixed(2)
-    const cssKda = (kda > 3.5) ? css.upperContents + ' ' + css.kdaGreat : css.upperContents ;
+    const cssKda =  (kda > 5) ? css.upperContents + ' ' + css.kdaGreatest  
+                                 : (kda > 3.5) ? 
+                                                css.upperContents + ' ' + css.kdaGreat 
+                                                : css.upperContents ;
 
     return (        
         <div className={css.championWinRateWrapper} key={matchInfosIdx}>

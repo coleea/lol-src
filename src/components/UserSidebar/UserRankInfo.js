@@ -21,7 +21,7 @@ export default function UserMain() {
 
                     const rankType = matchTypeName === matchTypeNames.solo ?  
                                                                         userSidebarInfo.solRank 
-                                                                        : userSidebarInfo._5on5Rank ;
+                                                                      : userSidebarInfo._5on5Rank ;
                     const tierRank          = rankType.tierRank.shortString.replace(/[^0-9]/g, '')
                     const lp                = rankType.tierRank.string.split('(')[1].split(')')[0]
                     const totalMatchCount   = rankType.wins + rankType.losses
@@ -29,8 +29,8 @@ export default function UserMain() {
 
                     return (
                             <div className={matchTypeName === matchTypeNames.solo ? 
-                                                                            css.solRankInfo 
-                                                                            : css._5on5RankInfo}>
+                                                                                css.solRankInfo 
+                                                                              : css._5on5RankInfo}>
                                 <div className={css.tierRank}>
                                     <img alt="tierRank" src={rankType.tierRank.imageUrl}></img>
                                 </div>
@@ -45,7 +45,11 @@ export default function UserMain() {
                                         </div>                               
                                     </div>
                                     <div className={css.winRatioWrapper}>
-                                        <div  className={(Number(winRatio) > 70) ? css.winRatioForSpecial :css.winRatio}>승률 {winRatio}</div>                            
+                                        <div  className={(Number(winRatio) > 70) ? 
+                                                    css.winRatioForSpecial 
+                                                    :css.winRatio}>
+                                                    승률 {winRatio}
+                                        </div>                            
                                     </div>
                                 </div>
                             </div>                                      
