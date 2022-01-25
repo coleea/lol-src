@@ -21,19 +21,21 @@ function App() {
   }, [])
 
   return (
-    <RecoilRoot>
-        <div className={css.app}>
-            <Header />
-            <div className={css.body}>
-              <UserHeader/>
-              <div className={css.main}>
-                <UserSidebar/>
-                <UserMain/>
-              </div>      
-            </div>       
-            <Footer/>
-        </div>
-    </RecoilRoot>
+    <>
+        <RecoilRoot>        
+            <div id={css.app}>
+                <Header />
+                <div id={css.body} >
+                  <UserHeader/>
+                  <div id={css.main}>
+                    <UserSidebar/>
+                    <UserMain/>
+                  </div>      
+                </div>       
+                <Footer/>
+            </div>
+        </RecoilRoot>
+    </>
   );
 }
 

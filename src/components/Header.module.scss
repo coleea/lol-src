@@ -26,6 +26,11 @@ ul, li {
                 background-color: white;
                 font-size: 12px;
             }
+
+            .input_query::placeholder {
+                padding-left: 12px;
+                font-size: 12px;
+            }
     
             .submitBtn {
                 position: relative;
@@ -108,12 +113,14 @@ ul, li {
             border-radius : 2px ;
             box-shadow: 0 2px 4px 0 rgb(0 0 0 /50%);
             background: #fff;
-            padding: 15px 0 1px 0;
+            padding: 15px 0 0px 0;
             z-index: 99;
+            margin-bottom: 0;
+            // padding-bottom: 10px;
             
             .autoCompleteItem {        
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 50px 100px;
                 margin : 0 120px 20px 20px;
         
                 .autoCompleteUserImg{
@@ -121,6 +128,9 @@ ul, li {
                     height: 36px;
                     margin-right: 14px;
                     border-radius: 50%;
+                }
+                .autoCompleteUserInfoWrapper {
+                    // width: 100%;
                 }
             }        
         }    

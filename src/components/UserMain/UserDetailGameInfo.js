@@ -28,16 +28,16 @@ const ICON_URL = {
     BUILD_RED : "//opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png",
     BUILD_BLUE : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildblue-p.png`,
     WARD_BLUE : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildblue-p.png`,
-    WARD_RED : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildblue-p.png`,     
-    BTN_WIN : "detail_btn_for_win.png",
-    BTN_LOSE : "detail_btn_for_lose.png",
+    WARD_RED : `https://opgg-static.akamaized.net/css3/sprite/images/icon-buildred-p.png`,     
+    BTN_WIN : "/detail_btn_for_win.png",
+    BTN_LOSE : "/detail_btn_for_lose.png",
 }
 const ITEM_INFO_URL = 'http://ddragon.leagueoflegends.com/cdn/10.15.1/data/ko_KR/item.json'
 
 
-export default function UserMain() {
+export default function UserDetailGameInfo({matchHistoryDetailInfo}) {
 
-    const [matchHistoryDetailInfo, setMatchHistoryDetailInfo]  = useRecoilState(matchHistoryDetailInfoAtom)
+    // const [matchHistoryDetailInfo, setMatchHistoryDetailInfo]  = useRecoilState(matchHistoryDetailInfoAtom)
     const itemToolTipWrapperRef = useRef(null)
     const [itemsInfo, setItemsInfo] = useState()
 
@@ -136,7 +136,7 @@ export default function UserMain() {
                         const passedTime = calculatePassedTime(matchInfo)
                         const {gamePlaySeconds, gamePlayMinutes, gamePlayHour} = calculatePlayaTime(matchInfo)                        
                         const championEngName = championNameEngToKor[
-                                                                     matchInfo.champion.imageUrl.split('/').at(-1).split('.')[0]
+                                                                     matchInfo.champion.imageUrl.split('/').slice(-1)[0].split('.')[0]
                                                                     ] 
                         const kill = matchInfo.stats.general.kill
                         const death = matchInfo.stats.general.death
@@ -241,17 +241,19 @@ function KDA({kill, death, assist, kda, largestMultiKill, multiKillNameKor, opSc
             <div className={css.kdaCalculate}>
                 <span className={css.kda}>{kda}</span>
                 <span>:1 평점</span>                                        
-            </div>           
-            {largestMultiKill && (
-                <div className={css.multiKillBadge}>
-                    {multiKillNameKor}
-                </div>
-            )}
-            {opScoreBadge && (
-                <div className={css.aceBadge}>
-                    {opScoreBadge}
-                </div>
-            )}
+            </div>       
+            <div className={css.badge}>
+                {largestMultiKill && (
+                    <div className={css.multiKillBadge}>
+                        {multiKillNameKor}
+                    </div>
+                )}
+                {opScoreBadge && (
+                    <div className={css.aceBadge}>
+                        {opScoreBadge}
+                    </div>
+                )}
+            </div>    
         </div>       
     )
 }
@@ -261,7 +263,7 @@ function Items({matchInfo, showItemToolTip, hideItemToolTip,blankItemNumber,isWi
         <div className={css.itemsWrapper}>
             <div className={css.items}>
                 {matchInfo.items.map((item,itemIdx)=> {
-                    const itemNumber = item.imageUrl.split('/').at(-1).split('.png')[0]
+                    const itemNumber = item.imageUrl.split('/').slice(-1)[0].split('.png')[0]
                     return (
                         <div className={css.item} 
                             key={itemIdx} 
@@ -276,7 +278,7 @@ function Items({matchInfo, showItemToolTip, hideItemToolTip,blankItemNumber,isWi
                     [...Array(blankItemNumber)].map((blankItem, blankItemIdx)=> {
                         return (
                             <div key={blankItemIdx}>
-                                <img  className={css.itemImg} src="./item_blank_icon.png"></img>                                                    
+                                <img  className={css.itemImg} src="/item_blank_icon.png"></img>                                                    
                             </div>
                         )
                     })

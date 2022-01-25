@@ -31,8 +31,8 @@ export default function UserMain() {
                             <div className={matchTypeName === matchTypeNames.solo ? 
                                                                             css.solRankInfo 
                                                                             : css._5on5RankInfo}>
-                                <div>
-                                    <img src={rankType.tierRank.imageUrl}></img>
+                                <div className={css.tierRank}>
+                                    <img alt="tierRank" src={rankType.tierRank.imageUrl}></img>
                                 </div>
                                 <div className={css.userInfo}>
                                     <div>{matchTypeName} 랭크</div>
@@ -44,8 +44,8 @@ export default function UserMain() {
                                             / {rankType.wins}승 {rankType.losses}패                                         
                                         </div>                               
                                     </div>
-                                    <div>
-                                        <div>승률 {winRatio}</div>                            
+                                    <div className={css.winRatioWrapper}>
+                                        <div  className={(Number(winRatio) > 70) ? css.winRatioForSpecial :css.winRatio}>승률 {winRatio}</div>                            
                                     </div>
                                 </div>
                             </div>                                      

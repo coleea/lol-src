@@ -4,10 +4,11 @@ import { useRecoilState } from 'recoil'
 import {basicInfoAtom, mostInfoAtom, matchesAtom, 
     userHeaderInfoAtom, userSidebarInfoAtom, latest20SummaryInfoAtom, matchHistoryDetailInfoAtom} from '../recoil/summonerInfo'
 import css from './Header.module.scss'
+import { useParams } from "react-router-dom";
 
 const l = console.log 
 
-const INITIAL_USER_QUERY          = 'HELLO'
+const INITIAL_USER_QUERY          = 'Hello User'
 const URL_TEMPLATE_BASIC_INFO     = `https://codingtest.op.gg/api/summoner/USERNAME`
 const URL_TEMPLATE_MOST_INFO      = `https://codingtest.op.gg/api/summoner/USERNAME/mostInfo`
 const URL_TEMPLATE_MATCHES        = `https://codingtest.op.gg/api/summoner/USERNAME/matches`
@@ -25,6 +26,9 @@ async function fetchForAutocomplete(username){
 }
 
 export default function Header() {
+
+    const params = useParams()
+    const username = params.username
 
     const [queryHistory, setQueryHistory] = useState(JSON.parse(localStorage.queryHistory || '[]'))
     const [favoriteUsers, setFavoriteUsers] = useState(JSON.parse(localStorage.favoriteUsers || '[]'))
@@ -47,7 +51,14 @@ export default function Header() {
     const [matchHistoryDetailInfo, setMatchHistoryDetailInfo]  = useRecoilState(matchHistoryDetailInfoAtom)    
 
     useEffect(() => {
-        getDataAndSetState(INITIAL_USER_QUERY) ; 
+
+        if(username){
+            getDataAndSetState(username) 
+            const queryHistoryArrRenewed = saveQueryToDB(username)
+            setQueryHistory(queryHistoryArrRenewed)
+        } else {
+            getDataAndSetState(INITIAL_USER_QUERY)
+        }
     }, [])
     
     const requestMatchHistoryDetail = async ({USER_QUERY, matches}) => {
@@ -179,9 +190,10 @@ export default function Header() {
 
     const toggleFavorite = e => {
         const classStr = e.target.classList.value
-        const username = classStr.split(' ')[0]
-
+        const username = e.target.closest('div').attributes.username.value
+                
         if(classStr.includes('favoriteOff')) {
+
             const favoriteUsersRenewed = [...favoriteUsers, username]
             setFavoriteUsers(favoriteUsersRenewed)            
 
@@ -191,10 +203,10 @@ export default function Header() {
             localStorage.favoriteUsers = JSON.stringify(favoriteUserArrClone)
 
         } else {
+            
             const userIdx = favoriteUsers.indexOf(username)
             const favoriteUserRenewed = [...favoriteUsers.slice(0, userIdx), 
                                          ...favoriteUsers.slice(userIdx + 1)]
-
             updateFavoriteUser(favoriteUserRenewed)            
             localStorage.favoriteUsers = JSON.stringify(favoriteUserRenewed)
         }
@@ -244,6 +256,8 @@ export default function Header() {
 
     function queryUser({username}){        
         getDataAndSetState(username)        
+        const queryHistoryArrRenewed = saveQueryToDB(username)
+        setQueryHistory(queryHistoryArrRenewed)
         initializeQueryState()
     }
 
@@ -347,12 +361,12 @@ function InputQuery({processUserSearch, doKeyInputCallback, searcBarRef}){
                     name='query' 
                     className={css.input_query} 
                     onKeyUp={doKeyInputCallback} 
-                    placeholder='소환사명, 챔피언, ···' 
+                    placeholder='소환사명, 챔피언···' 
                     ref={searcBarRef}
                     autoComplete='off'>
                 </input>
                 <button className={css.submitBtn} type='submit'>
-                    <img src="./opgg_search_submit.png"></img>
+                    <img src="/opgg_search_submit.png"></img>
                 </button>
             </form>
         </div>        
@@ -363,7 +377,7 @@ function QueryHistory({queryHistory, favoriteUsers, queryUser, toggleFavorite, r
 
     const URL_IMG_FOR_FAVORITE_ON = "https://opgg-static.akamaized.net/images/site/icon-favorite-on.png"
     const URL_IMG_FOR_FAVORITE_OFF = "https://opgg-static.akamaized.net/images/site/icon-favorite-off.png"
-    const URL_IMG_FOR_X_BTN = "./x_btn.png"
+    const URL_IMG_FOR_X_BTN = "/x_btn.png"
 
     return (
         <div className={css.RecentSummonerListWrap} >        
@@ -375,7 +389,7 @@ function QueryHistory({queryHistory, favoriteUsers, queryUser, toggleFavorite, r
                             <div className={css.username} onMouseDown={(e)=>{ queryUser({username :userName} ) }}>
                                 {userName}
                             </div>
-                            <div className={css.favoriteMark} onClick={toggleFavorite} >
+                            <div className={css.favoriteMark} onClick={toggleFavorite} username={userName}>
                                 {isFavorite ? 
                                     <img className={userName + ' ' + 'favoriteOn'} src={URL_IMG_FOR_FAVORITE_ON}></img>
                                     : <img className={userName + ' ' + 'favoriteOff'} src={URL_IMG_FOR_FAVORITE_OFF}></img>}
@@ -419,7 +433,7 @@ function FavoriteUsers({favoriteUsers, queryUser, removeFromFavorite}){
                         {user}
                     </div>
                     <div className={css.removeMark} userName={user} onClick={removeFromFavorite}>
-                        <img src="x_btn.png"></img>      
+                        <img src="/x_btn.png"></img>      
                     </div>
                 </div>
             )

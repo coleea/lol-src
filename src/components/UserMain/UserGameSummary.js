@@ -2,7 +2,6 @@ import { useRecoilState } from 'recoil'
 import css from './UserGameSummary.module.scss'
 import { latest20SummaryInfoAtom } from '../../recoil/summonerInfo'
 import { useEffect, useState } from 'react'
-// import * as d3 from "https://cdn.skypack.dev/d3@7";
 import * as d3 from 'd3';
 
 const l = console.log 
@@ -16,24 +15,28 @@ const positionNameEngToKorMapper = {
 }
 
 const positionImgUrlMapper = {
-    'Top' : './top_icon.png',
-    'Middle' : './mid_icon.png',
-    'Jungle' : './jungle_icon.png',
-    'Bottom' : './onedeal_icon.png',
-    'Support' : './supporter_icon.png',
+    'Top' : '/top_icon.png',
+    'Middle' : '/mid_icon.png',
+    'Jungle' : '/jungle_icon.png',
+    'Bottom' : '/onedeal_icon.png',
+    'Support' : '/supporter_icon.png',
 }
 
-export default function UserMain() {
+export default function UserMain({latest20SummaryInfo}) {
 
-    const [latest20SummaryInfo, setLatest20SummaryInfo]  = useRecoilState(latest20SummaryInfoAtom)
+    // const [latest20SummaryInfo, setLatest20SummaryInfo]  = useRecoilState(latest20SummaryInfoAtom)
     const [emptyChampionCount, setEmptyChampionCount] = useState(0)
+    const winRatio = latest20SummaryInfo && latest20SummaryInfo.wins / latest20SummaryInfo.totalMatch * 100
+    const kda = latest20SummaryInfo && latest20SummaryInfo.kda
+    const cssKdaRank = kda >= 5 ? css.kda_over5 
+                                : kda >= 4 ? css.kda_over4
+                                    : kda >= 3 ? css.kda_over3
+                                        : css.kdaNm
+    const winRate = latest20SummaryInfo && (latest20SummaryInfo.wins / latest20SummaryInfo.totalMatch * 100).toFixed(0) + '%' 
 
     useEffect(() => {    
-
-        if(latest20SummaryInfo){
-            
+        if(latest20SummaryInfo){            
             drawWinRatioCircle(latest20SummaryInfo)
-
             const emptyChampionCount = 3 - latest20SummaryInfo.champions.length
             setEmptyChampionCount(emptyChampionCount)
         }
@@ -85,132 +88,141 @@ export default function UserMain() {
             {latest20SummaryInfo && (
                 <div className={css.wrapper}>
                     <div className={css.gameSummary}>
-                        <div className={css.winLoseStats}>
-                            <div>
-                                <div className={css.battleRecord}>
-                                    {latest20SummaryInfo.totalMatch}전 {latest20SummaryInfo.wins}승 {latest20SummaryInfo.losses}패                                
-                                </div>
-                                <div className='forDrawing'>
-                                </div>
-                                <div className={css.winRate}>
-                                    {(latest20SummaryInfo.wins / latest20SummaryInfo.totalMatch * 100).toFixed(0) } %
-                                </div>
-                            </div>
-                        </div>
-                        <div className={css.kda}>
-                            <div className={css.kdaInnerWrapper}>
-                                <div  className={css.kdaUpperInfo}>                                
-                                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitFirst}>
-                                        {latest20SummaryInfo.kills}
-                                    </div>
-                                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitCenter}>
-                                        {latest20SummaryInfo.assists}
-                                    </div>
-                                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitLast}>
-                                        {latest20SummaryInfo.deaths}
-                                    </div>                                                                                                 
-                                </div>                            
-                                <div className={css.kdaBottomInfo}>                            
-                                    <div>
-                                        {latest20SummaryInfo.kda.toFixed(2)} : 1 
-                                    </div>
-                                    <div className={css.winRatio}>
-                                        (58%)
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                        <div className={css.favoriteChampions}>
-                            {latest20SummaryInfo.champions.map((v,i)=> {
-                                const kda = ((v.kills + v.assists) / v.deaths).toFixed(0)
-                                const winRatio = (v.wins / (v.wins + v.losses) * 100).toFixed(0)
-                                return (
-                                    <div className={css.championInfoUnit} key={i}>
-                                        <div >
-                                            <img className={css.championImg} src={v.imageUrl}></img>                                        
-                                        </div>
-                                        <div>
-                                            <div className={css.championName}>
-                                                {v.name}                                            
-                                            </div>
-                                            <div className={css.championStatistics}>
-                                                <div className={css.championWinRatio}>{winRatio}% </div>
-                                                <div className={css.winAndLose}>({v.wins}승 {v.losses}패)</div>
-                                                <div className={css.championKda}>{kda} 평점</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                            {
-                                emptyChampionCount > 0 && [...Array(emptyChampionCount)].map((_, i)=> {
-                                    return (
-                                        <div key={i}>
-                                            <div className={css.emptyChampionWrapper}>
-                                                <div className={css.emptyChampionImgWrapper}>
-                                                    <img width="34px" height="34px" src="./emptyChampion.png"></img>
-                                                </div>
-                                                <div  className={css.emptyChampionDescription}>
-                                                    챔피언 정보가 없습니다.
-                                                </div>                                                
-                                            </div>
-                                        </div>                                        
-                                    )
-                                })
-                            }
-                        </div>                
-                        <div className={css.favoritePosition}>
-                            <div className={css.favoritePositionTitle}>
-                                선호 포지션 (랭크)
-                            </div>
-                            {latest20SummaryInfo.positions.map((position,positionIdx)=> {
-
-                                const positionNameKor = positionNameEngToKorMapper[position.positionName]
-                                const positionImgUrl = positionImgUrlMapper[position.positionName]
-                                const roleRate= (position.games / latest20SummaryInfo.totalMatch * 100).toFixed(0)
-                                const winRate = (position.wins / (position.wins + position.losses) * 100).toFixed(0)
-
-                                return (
-                                    <div className={css.positionInfoWrapper} key={positionIdx}>
-                                        <div>
-                                            <img className={css.positionImg} src={positionImgUrl}></img>                                        
-                                        </div>
-                                        <div className={css.positionInfoDetail}>
-                                            <div className={css.positionName}>{positionNameKor}</div> 
-                                            <div className={css.PositionStatContent}>
-                                                <div className={css.roleRate}>{roleRate}%</div>
-                                                <div className={css.positionWinRatioWrapper}>
-                                                    <div>승률 </div>
-                                                    <div className={css.positionWinRate}>{winRate} %</div>  
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <WinLoseStats latest20SummaryInfo={latest20SummaryInfo} winRate={winRate} />
+                        <KDA latest20SummaryInfo={latest20SummaryInfo} cssKdaRank={cssKdaRank} winRatio={winRatio} />                      
+                        <ChampionInfos latest20SummaryInfo={latest20SummaryInfo} emptyChampionCount={emptyChampionCount} />
+                        <FavoritePosition latest20SummaryInfo={latest20SummaryInfo} />
                     </div>
                 </div>
             )}       
         </>
     )
+} 
+
+function WinLoseStats({latest20SummaryInfo, winRate}){
+    return (
+        <div className={css.winLoseStats}>
+            <div>
+                <div className={css.battleRecord}>
+                    {latest20SummaryInfo.totalMatch}전 {latest20SummaryInfo.wins}승 {latest20SummaryInfo.losses}패                                
+                </div>
+                <div className='forDrawing'>
+                </div>
+                <div className={css.winRate}>
+                    {winRate}
+                </div>
+            </div>
+        </div>        
+    )
 }
 
-/* 
-games: 15
-losses: 0
-position: "ADC"
-positionName: "Bottom"
-wins: 15 */
+function KDA({latest20SummaryInfo , cssKdaRank, winRatio}) {
+    return (
+        <div className={css.kda}>
+            <div className={css.kdaInnerWrapper}>
+                <div  className={css.kdaUpperInfo}>                                
+                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitFirst}>
+                        {latest20SummaryInfo.kills}
+                    </div>
+                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitCenter}>
+                        {latest20SummaryInfo.assists}
+                    </div>
+                    <div className={css.kdaUpperInfoUnit + ' ' + css.kdaUpperInfoUnitLast}>
+                        {latest20SummaryInfo.deaths}
+                    </div>                                                                                                 
+                </div>                            
+                <div className={css.kdaBottomInfo}>                            
+                    <div className={cssKdaRank}>
+                        {latest20SummaryInfo.kda.toFixed(2)} : 1 
+                    </div>
+                    <div className={winRatio > 60 ? css.winRatioSpecial : css.winRatioNm}>
+                        {` (${winRatio.toFixed(0)}%)`}
+                    </div>
+                </div>  
+            </div>
+        </div>        
+    )
+}
 
+function FavoritePosition({latest20SummaryInfo}) {
+    return (
+    <div className={css.favoritePosition}>
+        <div className={css.favoritePositionTitle}>
+            선호 포지션 (랭크)
+        </div>
+        {latest20SummaryInfo.positions.map((position,positionIdx)=> {
 
-/* 
-미리보기
-3:16
-[롤 이론강의]라인?포지션?/
-탑/
-정글/
-미드/
-원딜/
-서폿
-*/
+            const positionNameKor = positionNameEngToKorMapper[position.positionName]
+            const positionImgUrl = positionImgUrlMapper[position.positionName]
+            const roleRate= (position.games / latest20SummaryInfo.totalMatch * 100).toFixed(0)
+            const winRate = (position.wins / (position.wins + position.losses) * 100).toFixed(0)
+
+            return (
+                <div className={css.positionInfoWrapper} key={positionIdx}>
+                    <div>
+                        <img alt={`${positionNameKor}의 포지션 로고`} 
+                                className={css.positionImg} src={positionImgUrl}></img>                                        
+                    </div>
+                    <div className={css.positionInfoDetail}>
+                        <div className={css.positionName}>{positionNameKor}</div> 
+                        <div className={css.PositionStatContent}>
+                            <div className={css.roleRate}>{roleRate}%</div>
+                            <div className={css.positionWinRatioWrapper}>
+                                <div>승률</div>
+                                <div className={css.positionWinRate}>{winRate} %</div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })}
+    </div>
+    )
+}
+
+function ChampionInfos({latest20SummaryInfo, emptyChampionCount,}) {
+    return (
+    <div className={css.favoriteChampions}>
+        {latest20SummaryInfo.champions.map((v,i)=> {
+            const winRatio = (v.wins / (v.wins + v.losses) * 100).toFixed(0)
+            const kdaStr = ((v.kills + v.assists) / v.deaths).toFixed(0)
+            const kda = (v.kills + v.assists) / v.deaths
+            const cssKDA = kda > 6 ? css.kdaOver6 : css.kdaNm
+
+            return (
+                <div className={css.championInfoUnit} key={i}>
+                    <div >
+                        <img className={css.championImg} src={v.imageUrl}></img>                                        
+                    </div>
+                    <div className={css.infos}>
+                        <div className={css.championName}>
+                            {v.name}                                            
+                        </div>
+                        <div className={css.championStatistics}>
+                            <div className={css.championWinRatio}>{winRatio}% </div>
+                            <div className={css.winAndLose}>({v.wins}승 {v.losses}패)</div>
+                            <div className={cssKDA}>{kdaStr} 평점</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })}
+        {
+            emptyChampionCount > 0 && [...Array(emptyChampionCount)].map((_, i)=> {
+                return (
+                    <div key={i}>
+                        <div className={css.emptyChampionWrapper}>
+                            <div className={css.emptyChampionImgWrapper}>
+                                <img className={css.emptyChampionImg} src="/emptyChampion.png"></img>
+                            </div>
+                            <div className={css.emptyChampionDescription}>
+                                챔피언 정보가 없습니다.
+                            </div>                                                
+                        </div>
+                    </div>                                        
+                )
+            })
+        }
+    </div>          
+    )
+}

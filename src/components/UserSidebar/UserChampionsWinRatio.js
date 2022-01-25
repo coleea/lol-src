@@ -9,25 +9,13 @@ const viewTypes = {
     _7days : '7days'
 }
 
-function sortChampionList(winRatioARr) {
-
-    if(winRatioARr){
-        const winRatioFreeSeasonClone = [...winRatioARr]
-        winRatioFreeSeasonClone.sort((a,b)=> { return (b.wins  + b.losses) - (a.wins  + a.losses)  })
-        return winRatioFreeSeasonClone
-
-    } else {
-        return winRatioARr
-    }
-}
-
 export default function UserMain({}) {
 
     const [viewtype, setviewtype] = useState('general')
 
     const [userSidebarInfo, setUserSidebarInfo]  = useRecoilState(userSidebarInfoAtom)
-    const winRatioFreeSeason = sortChampionList(userSidebarInfo?.winRatioFreeSeason)
-    const winRatio7Days      = sortChampionList(userSidebarInfo?.winRatio7Days) 
+    const winRatioFreeSeason = getSortedChampions(userSidebarInfo?.winRatioFreeSeason)
+    const winRatio7Days      = getSortedChampions(userSidebarInfo?.winRatio7Days) 
 
     const toggleviewtype = e => {
         const viewtype = e.target.attributes.viewtype.value
@@ -91,7 +79,7 @@ function ChampionWinRate({matchInfos, matchInfosIdx}){
     return (        
         <div className={css.championWinRateWrapper} key={matchInfosIdx}>
             <div className={css.championImgWrapper}>
-                    <img className={css.championImg} src={matchInfos.imageUrl}></img>
+                    <img alt={`${matchInfos.name}의 이미지`} className={css.championImg} src={matchInfos.imageUrl}></img>
             </div>
             <div>
                     <p className={css.upperContents + ' ' + css.championName}>{matchInfos.name}</p>
@@ -102,7 +90,7 @@ function ChampionWinRate({matchInfos, matchInfosIdx}){
                     <p className={css.bottomContents}>{matchInfos.kills} / {matchInfos.assists} / {matchInfos.deaths}</p>
             </div>
             <div className={css._4thBlock}>
-                    <p className={css.upperContents}>{winRatio}%</p>
+                    <p className={`${css.upperContents} ${winRatio > 70 ? css.winRatioForSpecial : " "}`}>{winRatio}%</p>
                     <p className={css.bottomContents}>{totalGamesPlayed}게임</p>
             </div>                             
         </div>
@@ -117,7 +105,7 @@ function _7daysWinRate({matchInfos, matchInfosIdx}){
     return (
         <div className={css.champion7DaysWinRateWrapper} key={matchInfosIdx}>                                    
             <div className={css.championImgWrapper}>
-                <img className={css.championImg} src={matchInfos.imageUrl}></img>
+                <img alt={`${matchInfos.name}의 이미지`} className={css.championImg} src={matchInfos.imageUrl}></img>
             </div>
             <div className={css.name}>
                 {matchInfos.name}
@@ -139,4 +127,17 @@ function _7daysWinRate({matchInfos, matchInfosIdx}){
             </div>
         </div>
     )
+}
+
+
+function getSortedChampions(winRatioARr) {
+
+    if(winRatioARr){
+        const winRatioFreeSeasonClone = [...winRatioARr]
+        winRatioFreeSeasonClone.sort((a,b)=> { return (b.wins  + b.losses) - (a.wins  + a.losses)  })
+        return winRatioFreeSeasonClone
+
+    } else {
+        return winRatioARr
+    }
 }

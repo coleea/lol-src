@@ -1,39 +1,28 @@
-const fastify = require('fastify')
-const path = require('path')
-const axios = require("axios")
+const fastify      = require('fastify')
+const axios        = require("axios")
 const fastify_cors = require('fastify-cors')
-const app = fastify()
-const {PORT = 3000} = process.env
+const app          = fastify()
+const {PORT = 3000}= process.env
 
+const l = console.log 
 
 app.register(fastify_cors, { 
   origin: '*'
-  // put your options here
 })
 
-app.get('/', async (request, reply) => {
+app.get('/', async (req, _) => {
 
-    // l('request.query', request.query.username)
-    const username = request.query.username
-    const URL = `https://www.op.gg/ajax/autocomplete.json/keyword=${encodeURI(request.query.username)}`
-    // l({URL})
-    const dbRes = await axios({
-        url: URL,      
-        // method: 'get',
-    });
-    // l('dbRes', dbRes)
-    // l('dbRes.data', JSON.stringify(dbRes.data.sections))     
-    return JSON.stringify(dbRes.data.sections)    
-    // return reply.send({ hello: 'world' })
+    const username = req.query.username
+    const URL = `https://www.op.gg/ajax/autocomplete.json/keyword=${encodeURI(req.query.username)}`
+    const autocompeteInfo = await axios({url: URL,});
+    return JSON.stringify(autocompeteInfo.data.sections)    
 })
 
 if (require.main === module) {
-  // called directly i.e. "node app"
   app.listen(PORT, (err) => {
     if (err) console.error(err)
-    console.log('server listening on 3000')
+    l(`[Server Started] PORT ${PORT}`)
   })
 } else {
-  // required as a module => executed on aws lambda
   module.exports = app
 }
